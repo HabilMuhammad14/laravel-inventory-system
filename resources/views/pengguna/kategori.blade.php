@@ -349,9 +349,7 @@ body{
                      method="POST">
                    @csrf
                    @method('PUT')
-
                    <td>{{ $loop->iteration }}</td>
-
                    <td>
                        <input type="text"
                               name="kode_kategori"

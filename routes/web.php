@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\http\controllers\KategoriController;
+use App\http\controllers\SupplierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +24,11 @@ Route::post('/kategori', [KategoriController::class, 'store'])->name('kategori.s
 Route::get('/kategori/hapus/{kategori}', [KategoriController::class, 'destroy'])->name('kategori.hapus');
 Route::get('/kategori/edit/{kategori}', [KategoriController::class, 'edit'])->name('kategori.edit');
 Route::put('/kategori/update/{kategori}', [KategoriController::class, 'update'])->name('kategori.update');
+
+Route::get('/supplier', [SupplierController::class, 'index'] )->name('supplier.index');
+Route::post('/supplier', [SupplierController::class, 'store'])->name('supplier.store');
+route::get('/supplier/hapus/{supplier}', [SupplierController::class, 'destroy'])->name('supplier.hapus');
+Route::get('/supplier/edit/{supplier}', [SupplierController::class, 'edit'])->name('supplier.edit');
+Route::put('/supplier/update/{supplier}', [SupplierController::class, 'update'])->name('supplier.update');
+
 
