@@ -4,392 +4,216 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kategori Barang</title>
-  {{-- <link rel="stylesheet" href="kategori.css"> --}}
   <style>
-    *{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:Arial,sans-serif;display:flex;min-height:100vh;background:#f5f5f3}
 
-body{
-  font-family: Arial, sans-serif;
-  display: flex;
-  height: 100vh;
-  background: #f3f3f3;
-}
+    /* SIDEBAR */
+    .sidebar{width:240px;background:#fff;border-right:1px solid #e5e5e5;display:flex;flex-direction:column;flex-shrink:0;transition:transform .25s}
+    .sidebar-header{padding:18px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #e5e5e5}
+    .logo-circle{width:36px;height:36px;background:#dbeafe;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .logo-circle svg{width:18px;height:18px;stroke:#1a56db;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .logo-text{font-size:14px;font-weight:700;color:#111}
+    .logo-sub{font-size:11px;color:#999;margin-top:1px}
+    .nav{padding:12px 10px;flex:1}
+    .nav-label{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:.06em;padding:0 8px;margin-bottom:8px}
+    .nav-item{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:8px;text-decoration:none;color:#555;font-size:13.5px;margin-bottom:2px}
+    .nav-item svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+    .nav-item:hover{background:#f5f5f3}
+    .nav-item.active{background:#dbeafe;color:#1a56db}
 
-.sidebar{
-  width: 250px;
-  background: #1a73e8;
-  display: flex;
-  flex-direction: column;
-}
+    /* MAIN */
+    .main{flex:1;display:flex;flex-direction:column;min-width:0}
+    .topbar{background:#fff;border-bottom:1px solid #e5e5e5;padding:13px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .topbar-title{font-size:13px;color:#777;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .topbar-user{display:flex;align-items:center;gap:8px;flex-shrink:0}
+    .avatar{width:30px;height:30px;border-radius:50%;background:#dbeafe;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#1a56db;flex-shrink:0}
+    .user-name{font-size:13px;color:#333;white-space:nowrap}
+    .btn-logout{padding:5px 11px;background:transparent;border:1px solid #ddd;border-radius:6px;color:#666;font-size:12px;text-decoration:none}
+    .btn-logout:hover{background:#f5f5f3;color:#333}
 
-.sidebar-header{
-  padding: 24px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
-}
+    /* CONTENT */
+    .content{padding:24px 20px;flex:1}
+    .page-header{margin-bottom:20px}
+    .page-title{font-size:28px;font-weight:300;color:#333}
 
-.logo-icon{
-  width: 42px;
-  height: 42px;
-  background: white;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    /* CARD TABLE */
+    .card{background:#fff;border:1px solid #e5e5e5;border-radius:12px;overflow:hidden;overflow-x:auto}
+    .tabel{width:100%;border-collapse:collapse;font-size:13.5px;min-width:480px}
+    .tabel thead tr{background:#fafaf9}
+    .tabel th{padding:11px 14px;text-align:left;font-size:11px;font-weight:600;color:#aaa;letter-spacing:.05em;text-transform:uppercase;border-bottom:1px solid #eee}
+    .tabel td{padding:12px 14px;border-bottom:1px solid #f0f0f0;color:#333;vertical-align:middle}
+    .tabel tbody tr:last-child td{border-bottom:none}
+    .form-row td{background:#eff6ff}
+    .form-input{width:100%;height:32px;padding:5px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px;color:#333;outline:none}
+    .form-input:focus{border-color:#3b82f6;box-shadow:0 0 0 2px #dbeafe}
+    .form-aksi{display:flex;gap:6px}
+    .btn-simpan{padding:5px 14px;background:#1a56db;color:#fff;border:none;border-radius:6px;font-size:12px;cursor:pointer}
+    .btn-simpan:hover{background:#1648c0}
+    .btn-batal{padding:5px 12px;background:transparent;border:1px solid #ddd;border-radius:6px;color:#666;font-size:12px;cursor:pointer}
+    .btn-batal:hover{background:#f5f5f3}
+    .badge-id{display:inline-block;background:#f5f5f3;border:1px solid #e5e5e5;border-radius:5px;padding:2px 8px;font-size:12px;font-family:monospace;color:#666}
+    .btn-edit{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;font-size:12px;text-decoration:none;border-radius:6px;border:1px solid #93c5fd;color:#1a56db;background:#eff6ff}
+    .btn-hapus{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;font-size:12px;text-decoration:none;border-radius:6px;border:1px solid #fca5a5;color:#b91c1c;background:#fef2f2}
+    .btn-edit:hover{background:#dbeafe}
+    .btn-hapus:hover{background:#fee2e2}
+    .error-box{background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:13px;color:#b91c1c}
 
-.logo-icon img{
-  width: 22px;
-  height: 22px;
-}
+    /* HAMBURGER (mobile) */
+    .hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px}
+    .hamburger span{display:block;width:20px;height:2px;background:#555;margin:4px 0;border-radius:2px;transition:.2s}
+    .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:99}
 
-.logo-text{
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.logo-text span{
-  display: block;
-  font-size: 11px;
-  opacity: 0.7;
-}
-
-.nav{
-  background: white;
-  flex: 1;
-  padding: 15px;
-}
-
-.nav-label{
-  font-size: 11px;
-  color: #888;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-}
-
-.nav-item{
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  border-radius: 5px;
-  text-decoration: none;
-  color: #444;
-  font-size: 14px;
-  margin-bottom: 4px;
-}
-
-.nav-item img{
-  width: 16px;
-  height: 16px;
-}
-
-.nav-item:hover,
-.nav-item.active{
-  background: #e8f0fe;
-}
-
-.main{
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.topbar{
-  background: #1a73e8;
-  color: white;
-  padding: 18px 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.topbar-title{
-  font-size: 14px;
-}
-
-.topbar-user{
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 13px;
-}
-
-.btn-logout{
-  padding: 6px 12px;
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.3);
-  border-radius: 4px;
-  color: white;
-  text-decoration: none;
-  font-size: 12px;
-}
-
-.btn-logout:hover{
-  background: white;
-  color: #1a73e8;
-}
-
-.content{
-  padding: 20px;
-}
-
-.main-title{
-  margin-bottom: 15px;
-}
-
-.page-title{
-  font-size: 42px;
-  font-weight: 300;
-  color: #666;
-}
-
-.table-container{
-  background: white;
-  border: 1px solid #e5e5e5;
-  border-radius: 3px;
-  padding: 12px;
-}
-
-.tabel{
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13px;
-}
-
-.tabel thead{
-  background: #fafafa;
-}
-
-.tabel th{
-  padding: 12px 14px;
-  text-align: left;
-  color: #777;
-  border-bottom: 1px solid #eaeaea;
-}
-
-.tabel td{
-  padding: 13px 12px;
-  border-bottom: 1px solid #f0f0f0;
-  color: #444;
-}
-
-.form-row td{
-  background: #fafcff;
-}
-
-.form-input{
-  width: 100%;
-  height: 30px;
-  padding: 5px 8px;
-  border: 1px solid #dcdcdc;
-  border-radius: 3px;
-  font-size: 12px;
-}
-
-.form-aksi{
-  display: flex;
-  gap: 5px;
-}
-
-.btn-simpan,
-.btn-batal{
-  padding: 5px 10px;
-  font-size: 11px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-}
-
-.btn-simpan{
-  background: #1a73e8;
-  color: white;
-}
-
-.btn-batal{
-  background: #f1f1f1;
-  color: #555;
-}
-
-.btn-edit,
-.btn-hapus{
-  display: inline-block;
-  padding: 4px 10px;
-  font-size: 12px;
-  text-decoration: none;
-  border-radius: 3px;
-}
-
-.btn-edit{
-  background: #eef4ff;
-  border: 1px solid #1a73e8;
-  color: #1a73e8;
-}
-
-.btn-hapus{
-  background: #fff1f0;
-  border: 1px solid #d93025;
-  color: #d93025;
-}
+    /* RESPONSIVE */
+    @media(max-width:768px){
+      .sidebar{position:fixed;inset:0 auto 0 0;z-index:100;transform:translateX(-100%)}
+      .sidebar.open{transform:translateX(0)}
+      .overlay.show{display:block}
+      .hamburger{display:block}
+      .user-name{display:none}
+      .topbar-title{font-size:12px}
+      .content{padding:16px 12px}
+      .page-title{font-size:22px}
+    }
+    @media(max-width:480px){
+      .topbar{padding:11px 12px}
+    }
   </style>
 </head>
 <body>
 
-<div class="sidebar">
+<!-- Overlay mobile -->
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
+<div class="sidebar" id="sidebar">
   <div class="sidebar-header">
-
-    <div class="logo-icon">
-      <img src="logo.png" alt="">
+    <div class="logo-circle">
+      <svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 3H8a2 2 0 0 0-2 2v2h12V5a2 2 0 0 0-2-2z"/></svg>
     </div>
-
-    <div class="logo-text">
-      Inventaris
-      <span>Toko Sembako UM</span>
+    <div>
+      <div class="logo-text">Inventaris</div>
+      <div class="logo-sub">Toko Sembako UM</div>
     </div>
-
   </div>
-
   <nav class="nav">
-
     <div class="nav-label">Menu</div>
-
     <a class="nav-item" href="../Dashboard/dashboard.html">
-      <img src="home (1).png" alt="">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       Beranda
     </a>
-
     <a class="nav-item active" href="../kategoriPage/kategori.html">
-      <img src="boxes.png" alt="">
+      <svg viewBox="0 0 24 24"><rect x="2" y="3" width="7" height="7"/><rect x="15" y="3" width="7" height="7"/><rect x="15" y="14" width="7" height="7"/><rect x="2" y="14" width="7" height="7"/></svg>
       Kategori
     </a>
-
   </nav>
-
 </div>
 
 <div class="main">
-
   <div class="topbar">
-
-    <div class="topbar-title">
-      Sistem Inventaris Toko Sembako Utama Mandiri
+    <div style="display:flex;align-items:center;gap:10px;min-width:0">
+      <button class="hamburger" onclick="openSidebar()" aria-label="Buka menu">
+        <span></span><span></span><span></span>
+      </button>
+      <span class="topbar-title">Sistem Inventaris Toko Sembako Utama Mandiri</span>
     </div>
-
     <div class="topbar-user">
-      Habil Muhammad
-
-      <a href="/LoginPage/login.html" class="btn-logout">
-        Logout
-      </a>
+      <div class="avatar">HM</div>
+      <span class="user-name">Habil Muhammad</span>
+      <a href="/LoginPage/login.html" class="btn-logout">Logout</a>
     </div>
-
   </div>
 
   <div class="content">
-
-    <div class="main-title">
-
-      <div class="page-title">
-        Kategori Barang
-      </div>
+    <div class="page-header">
+      <div class="page-title">Kategori Barang</div>
     </div>
-    <div class="table-container">
-     @if ($errors->any())
-     <div style="color:red;">
-         <ul>
-             @foreach ($errors->all() as $error)
-                 <li>{{ $error }}</li>
-             @endforeach
-         </ul>
-     </div>
-     @endif
+
+    @if ($errors->any())
+    <div class="error-box">
+      <ul style="padding-left:16px">
+        @foreach ($errors->all() as $error)
+          <li>{{ $error }}</li>
+        @endforeach
+      </ul>
+    </div>
+    @endif
+
+    <div class="card">
       <table class="tabel">
         <thead>
           <tr>
-            <th>#</th>
-            <th>ID Kategori</th>
+            <th style="width:40px">#</th>
+            <th style="width:150px">ID Kategori</th>
             <th>Nama Kategori</th>
-            <th>Aksi</th>
+            <th style="width:130px">Aksi</th>
           </tr>
         </thead>
         <tbody>
-        <form action="{{route('kategori.store')}}" method="post">
+
+          <form action="{{route('kategori.store')}}" method="post">
             @csrf
             <tr class="form-row">
               <td>#</td>
-              <td>
-                <input type="text" class="form-input" placeholder="ID Kategori" name="kode_kategori">
-              </td>
-              <td>
-                <input type="text" class="form-input" placeholder="Nama Kategori" name="nama_kategori">
-              </td>
+              <td><input type="text" class="form-input" placeholder="KAT-001" name="kode_kategori"></td>
+              <td><input type="text" class="form-input" placeholder="Nama kategori..." name="nama_kategori"></td>
               <td>
                 <div class="form-aksi">
-                  <button class="btn-simpan" type="submit">
-                    Simpan
-                  </button>
-                  <button class="btn-batal" type="reset">
-                    Batal
-                  </button>
+                  <button class="btn-simpan" type="submit">Simpan</button>
+                  <button class="btn-batal" type="reset">Batal</button>
                 </div>
               </td>
             </tr>
-        </form>
-          @foreach ($kategoris as $kategori )
-          @if(isset($editKategori) && $editKategori->id == $kategori->id)
-             <form action="{{ route('kategori.update', $kategori) }}"
-                     method="POST">
-                   @csrf
-                   @method('PUT')
-                   <td>{{ $loop->iteration }}</td>
-                   <td>
-                       <input type="text"
-                              name="kode_kategori"
-                              value="{{ $kategori->kode_kategori }}">
-                   </td>
+          </form>
 
-                   <td>
-                       <input type="text"
-                              name="nama_kategori"
-                              value="{{ $kategori->nama_kategori }}">
-                   </td>
-                   <td>
-                       <button type="submit">Simpan</button>
-                       <a href="{{ route('kategori.index') }}">
-                           Batal
-                       </a>
-                   </td>
-               </form>
-            </tr>
+          @foreach ($kategoris as $kategori)
+            @if(isset($editKategori) && $editKategori->id == $kategori->id)
+              <form action="{{ route('kategori.update', $kategori) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <tr class="form-row">
+                  <td>{{ $loop->iteration }}</td>
+                  <td><input type="text" class="form-input" name="kode_kategori" value="{{ $kategori->kode_kategori }}"></td>
+                  <td><input type="text" class="form-input" name="nama_kategori" value="{{ $kategori->nama_kategori }}"></td>
+                  <td>
+                    <div class="form-aksi">
+                      <button type="submit" class="btn-simpan">Simpan</button>
+                      <a href="{{ route('kategori.index') }}" class="btn-batal">Batal</a>
+                    </div>
+                  </td>
+                </tr>
+              </form>
             @else
-            <tr>
-                <td>{{$loop->iteration}}</td>
-                <td>{{$kategori->kode_kategori}}</td>
-                <td>{{$kategori->nama_kategori}}</td>
+              <tr>
+                <td style="color:#aaa;font-size:12px">{{ $loop->iteration }}</td>
+                <td><span class="badge-id">{{ $kategori->kode_kategori }}</span></td>
+                <td>{{ $kategori->nama_kategori }}</td>
                 <td>
-                <a href="{{route('kategori.edit', $kategori)}}" class="btn-edit">Edit</a>
-                <a href="{{route('kategori.hapus', $kategori)}}" class="btn-hapus">Hapus</a>
+                  <div class="form-aksi">
+                    <a href="{{ route('kategori.edit', $kategori) }}" class="btn-edit">Edit</a>
+                    <a href="{{ route('kategori.hapus', $kategori) }}" class="btn-hapus">Hapus</a>
+                  </div>
                 </td>
-            </tr>
+              </tr>
             @endif
           @endforeach
+
         </tbody>
-
       </table>
-
     </div>
 
   </div>
-
 </div>
+
+<script>
+  function openSidebar(){
+    document.getElementById('sidebar').classList.add('open');
+    document.getElementById('overlay').classList.add('show');
+  }
+  function closeSidebar(){
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('overlay').classList.remove('show');
+  }
+</script>
 
 </body>
 </html>
