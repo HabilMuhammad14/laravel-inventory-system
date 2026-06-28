@@ -7,8 +7,6 @@
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:Arial,sans-serif;display:flex;min-height:100vh;background:#f5f5f3}
-
-    /* SIDEBAR */
     .sidebar{width:240px;background:#fff;border-right:1px solid #e5e5e5;display:flex;flex-direction:column;flex-shrink:0;transition:transform .25s}
     .sidebar-header{padding:18px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #e5e5e5}
     .logo-circle{width:36px;height:36px;background:#dbeafe;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -21,8 +19,6 @@
     .nav-item svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
     .nav-item:hover{background:#f5f5f3}
     .nav-item.active{background:#dbeafe;color:#1a56db}
-
-    /* MAIN */
     .main{flex:1;display:flex;flex-direction:column;min-width:0}
     .topbar{background:#fff;border-bottom:1px solid #e5e5e5;padding:13px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
     .topbar-title{font-size:13px;color:#777;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -31,13 +27,9 @@
     .user-name{font-size:13px;color:#333;white-space:nowrap}
     .btn-logout{padding:5px 11px;background:transparent;border:1px solid #ddd;border-radius:6px;color:#666;font-size:12px;text-decoration:none}
     .btn-logout:hover{background:#f5f5f3;color:#333}
-
-    /* CONTENT */
     .content{padding:24px 20px;flex:1}
     .page-header{margin-bottom:20px}
     .page-title{font-size:28px;font-weight:300;color:#333}
-
-    /* CARD TABLE */
     .card{background:#fff;border:1px solid #e5e5e5;border-radius:12px;overflow:hidden;overflow-x:auto}
     .tabel{width:100%;border-collapse:collapse;font-size:13.5px;min-width:480px}
     .tabel thead tr{background:#fafaf9}
@@ -58,13 +50,9 @@
     .btn-edit:hover{background:#dbeafe}
     .btn-hapus:hover{background:#fee2e2}
     .error-box{background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:13px;color:#b91c1c}
-
-    /* HAMBURGER (mobile) */
     .hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px}
     .hamburger span{display:block;width:20px;height:2px;background:#555;margin:4px 0;border-radius:2px;transition:.2s}
     .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:99}
-
-    /* RESPONSIVE */
     @media(max-width:768px){
       .sidebar{position:fixed;inset:0 auto 0 0;z-index:100;transform:translateX(-100%)}
       .sidebar.open{transform:translateX(0)}
@@ -81,10 +69,7 @@
   </style>
 </head>
 <body>
-
-<!-- Overlay mobile -->
 <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
-
 <div class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <div class="logo-circle">
