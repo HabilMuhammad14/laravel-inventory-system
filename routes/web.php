@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\http\controllers\KategoriController;
 use App\http\controllers\SupplierController;
+use App\http\controllers\BarangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +31,12 @@ Route::post('/supplier', [SupplierController::class, 'store'])->name('supplier.s
 route::get('/supplier/hapus/{supplier}', [SupplierController::class, 'destroy'])->name('supplier.hapus');
 Route::get('/supplier/edit/{supplier}', [SupplierController::class, 'edit'])->name('supplier.edit');
 Route::put('/supplier/update/{supplier}', [SupplierController::class, 'update'])->name('supplier.update');
+
+Route::get('/barang', [BarangController::class, 'index'])->name('barang.index');
+Route::get('/barang/hapus/{supplier}', [BarangController::class, 'destroy'])->name('barang.hapus');
+Route::post('/barang', [BarangController::class, 'store'])->name('barang.store');
+Route::get('/barang/edit/{barang}', [BarangController::class, 'edit'])->name('barang.edit');
+Route::put('/barang/update/{barang}', [BarangController::class, 'update'])->name('barang.update');
+
 
 
