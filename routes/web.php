@@ -40,4 +40,5 @@ Route::get('/barang/edit/{barang}', [BarangController::class, 'edit'])->name('ba
 Route::put('/barang/update/{barang}', [BarangController::class, 'update'])->name('barang.update');
 
 Route::get('/transaksiMasuk', [TransaksiMasukController::class, 'index'])->name('transaksiMasuk.index');
+Route::post('/transaksiMasuk', [TransaksiMasukController::class, 'store'])->name('transaksiMasuk.store');
 

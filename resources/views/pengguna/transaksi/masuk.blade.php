@@ -184,14 +184,14 @@
         <tbody>
 
           {{-- ======= FORM TAMBAH ======= --}}
-          <form action="" method="POST">
+          <form action="{{route('transaksiMasuk.store')}}" method="POST">
             @csrf
             <tr class="form-row">
               <td style="color:#aaa;font-size:12px">#</td>
-              <td><input type="text" class="form-input" placeholder="TM001" name="id_transaksi"></td>
+              <td><input type="text" class="form-input" placeholder="TM001" name="kode_transaksi_masuk"></td>
               <td><input type="date" class="form-input" name="tanggal"></td>
               <td>
-                <select class="form-select" name="id_barang">
+                <select class="form-select" name="barang_id">
                   @foreach($barangs as $barang)
                     <option value="{{ $barang->id }}">{{ $barang->kode_barang }} - {{ $barang->nama_barang }}</option>
                   @endforeach
@@ -199,16 +199,16 @@
               </td>
               <td><input type="number" class="form-input" placeholder="0" name="jumlah" min="1"></td>
               <td>
-                <select class="form-select" name="id_supplier">
+                <select class="form-select" name="supplier_id">
                   @foreach($suppliers as $supplier)
                     <option value="{{ $supplier->id }}">{{ $supplier->id_supplier }} - {{ $supplier->nama_supplier }}</option>
                   @endforeach
                 </select>
               </td>
               <td>
-                <select class="form-select" name="id_user">
+                <select class="form-select" name="user_id">
                   @foreach($users as $user)
-                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                    <option value="{{ $user->id }}">{{ $user->id }}</option>
                   @endforeach
                 </select>
               </td>
@@ -289,12 +289,12 @@
               {{-- ======= BARIS DATA NORMAL ======= --}}
               <tr>
                 <td style="color:#aaa;font-size:12px">{{ $loop->iteration }}</td>
-                <td><span class="badge-id">{{ $transaksi->id_transaksi }}</span></td>
+                <td><span class="badge-id">{{ $transaksi->kode_transaksi_masuk }}</span></td>
                 <td>{{ $transaksi->tanggal }}</td>
                 <td>{{ $transaksi->barang->kode_barang ?? '-' }}</td>
                 <td>{{ $transaksi->jumlah }}</td>
                 <td>{{ $transaksi->supplier->id_supplier ?? '-' }}</td>
-                <td>{{ $transaksi->user->name ?? '-' }}</td>
+                <td>{{ $transaksi->user->id ?? '-' }}</td>
                 <td>{{ $transaksi->keterangan }}</td>
                 <td>
                   <div class="aksi-group">

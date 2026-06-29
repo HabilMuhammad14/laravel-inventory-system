@@ -35,9 +35,18 @@ class transaksiMasukController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
-        //
+      $validated = $request->validate([
+        'kode_transaksi_masuk' => 'required|string|max:255|unique:transaksi_masuk,kode_transaksi_masuk',
+        'barang_id' => 'required|exists:barangs,id',
+        'supplier_id' => 'required|exists:suppliers,id',
+        'user_id' => 'required|exists:users,id',
+        'tanggal' => 'required|date',
+        'jumlah' => 'required|integer|min:1',
+        'keterangan' => 'nullable|string',
+      ]);
+      TransaksiMasuk::create($validated);
     }
 
     /**
