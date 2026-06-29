@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\http\controllers\KategoriController;
 use App\http\controllers\SupplierController;
 use App\http\controllers\BarangController;
+use App\http\controllers\TransaksiMasukController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,5 +39,5 @@ Route::post('/barang', [BarangController::class, 'store'])->name('barang.store')
 Route::get('/barang/edit/{barang}', [BarangController::class, 'edit'])->name('barang.edit');
 Route::put('/barang/update/{barang}', [BarangController::class, 'update'])->name('barang.update');
 
-
+Route::get('/transaksiMasuk', [TransaksiMasukController::class, 'index'])->name('transaksiMasuk.index');
 

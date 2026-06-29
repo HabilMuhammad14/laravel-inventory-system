@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inventaris - Barang</title>
+  <title>Transaksi Masuk</title>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:Arial,sans-serif;display:flex;min-height:100vh;background:#f5f5f3}
@@ -32,14 +32,16 @@
     .btn-logout:hover{background:#f5f5f3;color:#333}
 
     .content{padding:24px 20px;flex:1;overflow-y:auto}
-    .page-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;gap:12px;flex-wrap:wrap}
+    .page-header{margin-bottom:16px}
     .page-title{font-size:28px;font-weight:300;color:#333}
-    .btn-kategori{padding:7px 14px;background:transparent;border:1px solid #ddd;border-radius:6px;color:#555;font-size:13px;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
-    .btn-kategori svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-    .btn-kategori:hover{background:#f5f5f3;border-color:#bbb;color:#333}
 
-    .card{background:#fff;border:1px solid #e5e5e5;border-radius:12px;overflow:hidden;overflow-x:auto}
-    .tabel{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
+    .transaksi-tab{display:flex;gap:4px;margin-bottom:16px;border-bottom:1px solid #e5e5e5;padding-bottom:0}
+    .tab-btn{padding:8px 16px;font-size:13px;text-decoration:none;color:#777;border-radius:6px 6px 0 0;border:1px solid transparent;border-bottom:none;margin-bottom:-1px}
+    .tab-btn:hover{color:#333;background:#f5f5f3}
+    .tab-btn.active{background:#fff;color:#1a56db;border-color:#e5e5e5;border-bottom-color:#fff;font-weight:500}
+
+    .card{background:#fff;border:1px solid #e5e5e5;border-radius:0 12px 12px 12px;overflow:hidden;overflow-x:auto}
+    .tabel{width:100%;border-collapse:collapse;font-size:13px;min-width:800px}
     .tabel thead tr{background:#fafaf9}
     .tabel th{padding:11px 14px;text-align:left;font-size:11px;font-weight:600;color:#aaa;letter-spacing:.05em;text-transform:uppercase;border-bottom:1px solid #eee;white-space:nowrap}
     .tabel td{padding:11px 14px;border-bottom:1px solid #f0f0f0;color:#333;vertical-align:middle}
@@ -105,23 +107,23 @@
   </div>
   <nav class="nav">
     <div class="nav-label">Menu</div>
-    <a class="nav-item" href="../Dashboard/dashboard.html">
+    <a class="nav-item" href="../../Dashboard/dashboard.html">
       <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       Beranda
     </a>
-    <a class="nav-item active" href="{{route('barang.index')}}">
+    <a class="nav-item" href="../../barangPage/barang.html">
       <svg viewBox="0 0 24 24"><rect x="2" y="3" width="7" height="7"/><rect x="15" y="3" width="7" height="7"/><rect x="15" y="14" width="7" height="7"/><rect x="2" y="14" width="7" height="7"/></svg>
       Barang
     </a>
-    <a class="nav-item" href="{{route('transaksiMasuk.index')}}">
+    <a class="nav-item active" href="../../TransaksiPage/TransaksiMasuk/transaksi.html">
       <svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
       Transaksi
     </a>
-    <a class="nav-item" href="{{route('supplier.index')}}">
+    <a class="nav-item" href="../../supplierPage/supplier.html">
       <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
       Supplier
     </a>
-    <a class="nav-item" href="../laporanStokPage/stok.html">
+    <a class="nav-item" href="../../laporanStokPage/stok.html">
       <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
       Laporan Stok
     </a>
@@ -145,11 +147,13 @@
 
   <div class="content">
     <div class="page-header">
-      <div class="page-title">Barang</div>
-      <a href="{{route('kategori.index')}}" class="btn-kategori">
-        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="7" height="7"/><rect x="15" y="3" width="7" height="7"/><rect x="15" y="14" width="7" height="7"/><rect x="2" y="14" width="7" height="7"/></svg>
-        Kategori
-      </a>
+      <div class="page-title">Transaksi Masuk</div>
+    </div>
+
+    <div class="transaksi-tab">
+      <a href="" class="tab-btn active">Transaksi Masuk</a>
+      <a href="" class="tab-btn">Transaksi Keluar</a>
+      <a href="" class="tab-btn">Retur Barang</a>
     </div>
 
     @if ($errors->any())
@@ -167,32 +171,48 @@
         <thead>
           <tr>
             <th style="width:36px">#</th>
-            <th style="width:100px">Kode</th>
-            <th style="min-width:150px">Nama Barang</th>
-            <th style="width:130px">Kategori</th>
-            <th style="width:90px">Satuan</th>
-            <th style="width:110px">Harga</th>
+            <th style="width:100px">ID Transaksi</th>
+            <th style="width:110px">Tanggal</th>
+            <th style="width:120px">Barang</th>
+            <th style="width:80px">Jumlah</th>
+            <th style="width:120px">Supplier</th>
+            <th style="width:80px">ID User</th>
+            <th style="min-width:120px">Keterangan</th>
             <th style="width:120px">Aksi</th>
           </tr>
         </thead>
         <tbody>
 
           {{-- ======= FORM TAMBAH ======= --}}
-          <form action="{{ route('barang.store') }}" method="POST">
+          <form action="" method="POST">
             @csrf
             <tr class="form-row">
               <td style="color:#aaa;font-size:12px">#</td>
-              <td><input type="text" class="form-input" placeholder="BRG001" name="kode_barang"></td>
-              <td><input type="text" class="form-input" placeholder="Nama Barang" name="nama_barang"></td>
+              <td><input type="text" class="form-input" placeholder="TM001" name="id_transaksi"></td>
+              <td><input type="date" class="form-input" name="tanggal"></td>
               <td>
-                <select class="form-select" name="kategori_id">
-                  @foreach($kategoris as $kat)
-                    <option value="{{ $kat->id }}">{{ $kat->kode_kategori }} - {{ $kat->nama_kategori }}</option>
+                <select class="form-select" name="id_barang">
+                  @foreach($barangs as $barang)
+                    <option value="{{ $barang->id }}">{{ $barang->kode_barang }} - {{ $barang->nama_barang }}</option>
                   @endforeach
                 </select>
               </td>
-              <td><input type="text" class="form-input" placeholder="Kg" name="satuan"></td>
-              <td><input type="text" class="form-input" placeholder="0" name="harga"></td>
+              <td><input type="number" class="form-input" placeholder="0" name="jumlah" min="1"></td>
+              <td>
+                <select class="form-select" name="id_supplier">
+                  @foreach($suppliers as $supplier)
+                    <option value="{{ $supplier->id }}">{{ $supplier->id_supplier }} - {{ $supplier->nama_supplier }}</option>
+                  @endforeach
+                </select>
+              </td>
+              <td>
+                <select class="form-select" name="id_user">
+                  @foreach($users as $user)
+                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                  @endforeach
+                </select>
+              </td>
+              <td><input type="text" class="form-input" placeholder="Keterangan" name="keterangan"></td>
               <td>
                 <div class="aksi-group">
                   <button class="btn-simpan" type="submit">Simpan</button>
@@ -203,44 +223,62 @@
           </form>
 
           {{-- ======= LOOP DATA ======= --}}
-          @foreach ($barangs as $barang)
-            @if(isset($editBarang) && $editBarang->id == $barang->id)
+          @foreach ($transaksis as $transaksi)
+            @if(isset($editTransaksi) && $editTransaksi->id == $transaksi->id)
 
               {{-- ======= FORM EDIT ======= --}}
-              <form action="{{ route('barang.update', $barang) }}" method="POST">
+              <form action="" method="POST">
                 @csrf
                 @method('PUT')
                 <tr class="edit-row">
                   <td style="color:#aaa;font-size:12px">{{ $loop->iteration }}</td>
                   <td>
-                    <input type="text" class="form-input {{ $errors->has('kode_barang') ? 'input-error' : '' }}" name="kode_barang" value="{{ old('kode_barang', $barang->kode_barang) }}">
-                    @error('kode_barang')<span class="error-text">{{ $message }}</span>@enderror
+                    <input type="text" class="form-input {{ $errors->has('id_transaksi') ? 'input-error' : '' }}" name="id_transaksi" value="{{ old('id_transaksi', $transaksi->id_transaksi) }}">
+                    @error('id_transaksi')<span class="error-text">{{ $message }}</span>@enderror
                   </td>
                   <td>
-                    <input type="text" class="form-input {{ $errors->has('nama_barang') ? 'input-error' : '' }}" name="nama_barang" value="{{ old('nama_barang', $barang->nama_barang) }}">
-                    @error('nama_barang')<span class="error-text">{{ $message }}</span>@enderror
+                    <input type="date" class="form-input {{ $errors->has('tanggal') ? 'input-error' : '' }}" name="tanggal" value="{{ old('tanggal', $transaksi->tanggal) }}">
+                    @error('tanggal')<span class="error-text">{{ $message }}</span>@enderror
                   </td>
                   <td>
-                    <select class="form-select" name="kategori_id">
-                      @foreach($kategoris as $kat)
-                        <option value="{{ $kat->id }}" {{ $barang->id_kategori == $kat->id ? 'selected' : '' }}>
-                          {{ $kat->kode_kategori }} - {{ $kat->nama_kategori }}
+                    <select class="form-select" name="id_barang">
+                      @foreach($barangs as $barang)
+                        <option value="{{ $barang->id }}" {{ $transaksi->id_barang == $barang->id ? 'selected' : '' }}>
+                          {{ $barang->kode_barang }} - {{ $barang->nama_barang }}
                         </option>
                       @endforeach
                     </select>
                   </td>
                   <td>
-                    <input type="text" class="form-input {{ $errors->has('satuan') ? 'input-error' : '' }}" name="satuan" value="{{ old('satuan', $barang->satuan) }}">
-                    @error('satuan')<span class="error-text">{{ $message }}</span>@enderror
+                    <input type="number" class="form-input {{ $errors->has('jumlah') ? 'input-error' : '' }}" name="jumlah" value="{{ old('jumlah', $transaksi->jumlah) }}" min="1">
+                    @error('jumlah')<span class="error-text">{{ $message }}</span>@enderror
                   </td>
                   <td>
-                    <input type="text" class="form-input {{ $errors->has('harga') ? 'input-error' : '' }}" name="harga" value="{{ old('harga', $barang->harga) }}">
-                    @error('harga')<span class="error-text">{{ $message }}</span>@enderror
+                    <select class="form-select" name="id_supplier">
+                      @foreach($suppliers as $supplier)
+                        <option value="{{ $supplier->id }}" {{ $transaksi->id_supplier == $supplier->id ? 'selected' : '' }}>
+                          {{ $supplier->id_supplier }} - {{ $supplier->nama_supplier }}
+                        </option>
+                      @endforeach
+                    </select>
+                  </td>
+                  <td>
+                    <select class="form-select" name="id_user">
+                      @foreach($users as $user)
+                        <option value="{{ $user->id }}" {{ $transaksi->id_user == $user->id ? 'selected' : '' }}>
+                          {{ $user->name }}
+                        </option>
+                      @endforeach
+                    </select>
+                  </td>
+                  <td>
+                    <input type="text" class="form-input {{ $errors->has('keterangan') ? 'input-error' : '' }}" name="keterangan" value="{{ old('keterangan', $transaksi->keterangan) }}">
+                    @error('keterangan')<span class="error-text">{{ $message }}</span>@enderror
                   </td>
                   <td>
                     <div class="aksi-group">
                       <button type="submit" class="btn-simpan">Simpan</button>
-                      <a href="{{ route('barang.index') }}" class="btn-batal">Batal</a>
+                      <a href="" class="btn-batal">Batal</a>
                     </div>
                   </td>
                 </tr>
@@ -251,15 +289,17 @@
               {{-- ======= BARIS DATA NORMAL ======= --}}
               <tr>
                 <td style="color:#aaa;font-size:12px">{{ $loop->iteration }}</td>
-                <td><span class="badge-id">{{ $barang->kode_barang }}</span></td>
-                <td>{{ $barang->nama_barang }}</td>
-                <td>{{ $barang->kategori->nama_kategori ?? '-' }}</td>
-                <td>{{ $barang->satuan }}</td>
-                <td>Rp {{ number_format($barang->harga, 0, ',', '.') }}</td>
+                <td><span class="badge-id">{{ $transaksi->id_transaksi }}</span></td>
+                <td>{{ $transaksi->tanggal }}</td>
+                <td>{{ $transaksi->barang->kode_barang ?? '-' }}</td>
+                <td>{{ $transaksi->jumlah }}</td>
+                <td>{{ $transaksi->supplier->id_supplier ?? '-' }}</td>
+                <td>{{ $transaksi->user->name ?? '-' }}</td>
+                <td>{{ $transaksi->keterangan }}</td>
                 <td>
                   <div class="aksi-group">
-                    <a href="{{ route('barang.edit', $barang) }}" class="btn-edit">Edit</a>
-                    <a href="{{ route('barang.hapus', $barang) }}" class="btn-hapus">Hapus</a>
+                    <a href="" class="btn-edit">Edit</a>
+                    <a href="" class="btn-hapus">Hapus</a>
                   </div>
                 </td>
               </tr>
