@@ -41,4 +41,5 @@ Route::put('/barang/update/{barang}', [BarangController::class, 'update'])->name
 
 Route::get('/transaksiMasuk', [TransaksiMasukController::class, 'index'])->name('transaksiMasuk.index');
 Route::post('/transaksiMasuk', [TransaksiMasukController::class, 'store'])->name('transaksiMasuk.store');
+Route::get('/transaksiMasuk/hapus/{transaksi}', [TransaksiMasukController::class, 'destroy'])->name('transaksiMasuk.hapus');
 

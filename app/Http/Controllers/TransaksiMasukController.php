@@ -76,8 +76,9 @@ class transaksiMasukController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(cr $cr): RedirectResponse
+    public function destroy(TransaksiMasuk $transaksi)
     {
-        //
+        $transaksi->delete();
+        return redirect()->route('transaksiMasuk.index');
     }
 }

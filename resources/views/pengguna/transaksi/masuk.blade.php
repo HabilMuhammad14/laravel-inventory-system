@@ -299,7 +299,7 @@
                 <td>
                   <div class="aksi-group">
                     <a href="" class="btn-edit">Edit</a>
-                    <a href="" class="btn-hapus">Hapus</a>
+                    <a href="{{route('transaksiMasuk.hapus', $transaksi)}}" class="btn-hapus">Hapus</a>
                   </div>
                 </td>
               </tr>
