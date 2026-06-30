@@ -111,15 +111,15 @@
       <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       Beranda
     </a>
-    <a class="nav-item" href="../../barangPage/barang.html">
+    <a class="nav-item" href="{{route('barang.index')}}">
       <svg viewBox="0 0 24 24"><rect x="2" y="3" width="7" height="7"/><rect x="15" y="3" width="7" height="7"/><rect x="15" y="14" width="7" height="7"/><rect x="2" y="14" width="7" height="7"/></svg>
       Barang
     </a>
-    <a class="nav-item active" href="../../TransaksiPage/TransaksiMasuk/transaksi.html">
+    <a class="nav-item active" href="{{route('transaksiMasuk.index')}}">
       <svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
       Transaksi
     </a>
-    <a class="nav-item" href="../../supplierPage/supplier.html">
+    <a class="nav-item" href="{{route('supplier.index')}}">
       <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
       Supplier
     </a>

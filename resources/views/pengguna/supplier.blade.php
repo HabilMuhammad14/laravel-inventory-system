@@ -114,7 +114,7 @@
       <svg viewBox="0 0 24 24"><rect x="2" y="3" width="7" height="7"/><rect x="15" y="3" width="7" height="7"/><rect x="15" y="14" width="7" height="7"/><rect x="2" y="14" width="7" height="7"/></svg>
       Barang
     </a>
-    <a class="nav-item" href="../TransaksiPage/TransaksiMasuk/transaksi.html">
+    <a class="nav-item" href="{{route('transaksiMasuk.index')}}">
       <svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
       Transaksi
     </a>

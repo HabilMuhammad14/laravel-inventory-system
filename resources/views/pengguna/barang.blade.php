@@ -172,6 +172,7 @@
             <th style="width:130px">Kategori</th>
             <th style="width:90px">Satuan</th>
             <th style="width:110px">Harga</th>
+             <th style="width:80px">Stok</th>
             <th style="width:120px">Aksi</th>
           </tr>
         </thead>
@@ -193,6 +194,7 @@
               </td>
               <td><input type="text" class="form-input" placeholder="Kg" name="satuan"></td>
               <td><input type="text" class="form-input" placeholder="0" name="harga"></td>
+              <td><input type="text" class="form-input" placeholder="0" name="stok"></td>
               <td>
                 <div class="aksi-group">
                   <button class="btn-simpan" type="submit">Simpan</button>
@@ -232,11 +234,15 @@
                   <td>
                     <input type="text" class="form-input {{ $errors->has('satuan') ? 'input-error' : '' }}" name="satuan" value="{{ old('satuan', $barang->satuan) }}">
                     @error('satuan')<span class="error-text">{{ $message }}</span>@enderror
-                  </td>
-                  <td>
+                </td>
+                <td>
                     <input type="text" class="form-input {{ $errors->has('harga') ? 'input-error' : '' }}" name="harga" value="{{ old('harga', $barang->harga) }}">
                     @error('harga')<span class="error-text">{{ $message }}</span>@enderror
-                  </td>
+                </td>
+                <td>
+                <input type="number" class="form-input {{ $errors->has('stok') ? 'input-error' : '' }}" name="stok" value="{{ old('stok', $barang->stok) }}" min="0">
+                @error('stok')<span class="error-text">{{ $message }}</span>@enderror
+              </td>
                   <td>
                     <div class="aksi-group">
                       <button type="submit" class="btn-simpan">Simpan</button>
@@ -256,6 +262,7 @@
                 <td>{{ $barang->kategori->nama_kategori ?? '-' }}</td>
                 <td>{{ $barang->satuan }}</td>
                 <td>Rp {{ number_format($barang->harga, 0, ',', '.') }}</td>
+                <td>{{ $barang->stok }}</td>
                 <td>
                   <div class="aksi-group">
                     <a href="{{ route('barang.edit', $barang) }}" class="btn-edit">Edit</a>
