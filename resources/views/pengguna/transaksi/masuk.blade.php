@@ -227,49 +227,53 @@
             @if(isset($editTransaksi) && $editTransaksi->id == $transaksi->id)
 
               {{-- ======= FORM EDIT ======= --}}
-              <form action="" method="POST">
+{{-- ======= FORM EDIT ======= --}}
+              <form action="{{route('transaksiMasuk.update', $transaksi)}}" method="POST">
                 @csrf
                 @method('PUT')
                 <tr class="edit-row">
                   <td style="color:#aaa;font-size:12px">{{ $loop->iteration }}</td>
                   <td>
-                    <input type="text" class="form-input {{ $errors->has('id_transaksi') ? 'input-error' : '' }}" name="id_transaksi" value="{{ old('id_transaksi', $transaksi->id_transaksi) }}">
-                    @error('id_transaksi')<span class="error-text">{{ $message }}</span>@enderror
+                    <input type="text" class="form-input {{ $errors->has('kode_transaksi_masuk') ? 'input-error' : '' }}" name="kode_transaksi_masuk" value="{{ old('kode_transaksi_masuk', $transaksi->kode_transaksi_masuk) }}">
+                    @error('kode_transaksi_masuk')<span class="error-text">{{ $message }}</span>@enderror
                   </td>
                   <td>
                     <input type="date" class="form-input {{ $errors->has('tanggal') ? 'input-error' : '' }}" name="tanggal" value="{{ old('tanggal', $transaksi->tanggal) }}">
                     @error('tanggal')<span class="error-text">{{ $message }}</span>@enderror
                   </td>
                   <td>
-                    <select class="form-select" name="id_barang">
+                    <select class="form-select {{ $errors->has('barang_id') ? 'input-error' : '' }}" name="barang_id">
                       @foreach($barangs as $barang)
-                        <option value="{{ $barang->id }}" {{ $transaksi->id_barang == $barang->id ? 'selected' : '' }}>
+                        <option value="{{ $barang->id }}" {{ old('barang_id', $transaksi->barang_id) == $barang->id ? 'selected' : '' }}>
                           {{ $barang->kode_barang }} - {{ $barang->nama_barang }}
                         </option>
                       @endforeach
                     </select>
+                    @error('barang_id')<span class="error-text">{{ $message }}</span>@enderror
                   </td>
                   <td>
                     <input type="number" class="form-input {{ $errors->has('jumlah') ? 'input-error' : '' }}" name="jumlah" value="{{ old('jumlah', $transaksi->jumlah) }}" min="1">
                     @error('jumlah')<span class="error-text">{{ $message }}</span>@enderror
                   </td>
                   <td>
-                    <select class="form-select" name="id_supplier">
+                    <select class="form-select {{ $errors->has('supplier_id') ? 'input-error' : '' }}" name="supplier_id">
                       @foreach($suppliers as $supplier)
-                        <option value="{{ $supplier->id }}" {{ $transaksi->id_supplier == $supplier->id ? 'selected' : '' }}>
+                        <option value="{{ $supplier->id }}" {{ old('supplier_id', $transaksi->supplier_id) == $supplier->id ? 'selected' : '' }}>
                           {{ $supplier->id_supplier }} - {{ $supplier->nama_supplier }}
                         </option>
                       @endforeach
                     </select>
+                    @error('supplier_id')<span class="error-text">{{ $message }}</span>@enderror
                   </td>
                   <td>
-                    <select class="form-select" name="id_user">
+                    <select class="form-select {{ $errors->has('user_id') ? 'input-error' : '' }}" name="user_id">
                       @foreach($users as $user)
-                        <option value="{{ $user->id }}" {{ $transaksi->id_user == $user->id ? 'selected' : '' }}>
-                          {{ $user->name }}
+                        <option value="{{ $user->id }}" {{ old('user_id', $transaksi->user_id) == $user->id ? 'selected' : '' }}>
+                          {{ $user->id }}
                         </option>
                       @endforeach
                     </select>
+                    @error('user_id')<span class="error-text">{{ $message }}</span>@enderror
                   </td>
                   <td>
                     <input type="text" class="form-input {{ $errors->has('keterangan') ? 'input-error' : '' }}" name="keterangan" value="{{ old('keterangan', $transaksi->keterangan) }}">
@@ -278,12 +282,11 @@
                   <td>
                     <div class="aksi-group">
                       <button type="submit" class="btn-simpan">Simpan</button>
-                      <a href="" class="btn-batal">Batal</a>
+                      <a href="{{route('transaksiMasuk.index')}}" class="btn-batal">Batal</a>
                     </div>
                   </td>
                 </tr>
               </form>
-
             @else
 
               {{-- ======= BARIS DATA NORMAL ======= --}}
@@ -298,7 +301,7 @@
                 <td>{{ $transaksi->keterangan }}</td>
                 <td>
                   <div class="aksi-group">
-                    <a href="" class="btn-edit">Edit</a>
+                    <a href="{{route('transaksiMasuk.edit', $transaksi)}}" class="btn-edit">Edit</a>
                     <a href="{{route('transaksiMasuk.hapus', $transaksi)}}" class="btn-hapus">Hapus</a>
                   </div>
                 </td>

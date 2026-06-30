@@ -47,7 +47,7 @@ class transaksiMasukController extends Controller
         'keterangan' => 'nullable|string',
       ]);
       TransaksiMasuk::create($validated);
-    }
+      }
 
     /**
      * Display the specified resource.
@@ -60,17 +60,30 @@ class transaksiMasukController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(cr $cr): Response
+    public function edit(TransaksiMasuk $transaksi)
     {
-        //
+        $transaksis = TransaksiMasuk::all();
+        $barangs = Barang::all();
+        $suppliers = Supplier::all();
+        $users = Supplier::all();
+        return view('pengguna.transaksi.masuk', ['transaksis' => $transaksis, 'editTransaksi' => $transaksi, 'barangs' => $barangs, 'suppliers' => $suppliers, 'users' => $users]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, cr $cr): RedirectResponse
+    public function update(Request $request, TransaksiMasuk $transaksi)
     {
-        //
+        $validated = $request->validate([
+          'kode_transaksi_masuk' => 'required|string|max:255',
+          'barang_id' => 'required|exists:barangs,id',
+          'supplier_id' => 'required|exists:suppliers,id',
+          'user_id' => 'required|exists:users,id',
+          'tanggal' => 'required|date',
+          'jumlah' => 'required|integer|min:1',
+          'keterangan' => 'nullable|string',
+        ]);
+        $transaksi->update($validated);
     }
 
     /**
