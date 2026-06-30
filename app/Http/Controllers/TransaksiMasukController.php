@@ -47,6 +47,7 @@ class transaksiMasukController extends Controller
         'keterangan' => 'nullable|string',
       ]);
       TransaksiMasuk::create($validated);
+      return redirect()->route('transaksiMasuk.index');
       }
 
     /**
@@ -84,6 +85,7 @@ class transaksiMasukController extends Controller
           'keterangan' => 'nullable|string',
         ]);
         $transaksi->update($validated);
+        return redirect()->route('transaksiMasuk.index');
     }
 
     /**
