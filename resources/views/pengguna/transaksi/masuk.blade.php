@@ -151,8 +151,8 @@
     </div>
 
     <div class="transaksi-tab">
-      <a href="" class="tab-btn active">Transaksi Masuk</a>
-      <a href="" class="tab-btn">Transaksi Keluar</a>
+      <a href="{{route('transaksiMasuk.index')}}" class="tab-btn active">Transaksi Masuk</a>
+      <a href="{{route('transaksiKeluar.index')}}" class="tab-btn">Transaksi Keluar</a>
       <a href="" class="tab-btn">Retur Barang</a>
     </div>
 

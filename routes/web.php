@@ -5,6 +5,7 @@ use App\http\controllers\KategoriController;
 use App\http\controllers\SupplierController;
 use App\http\controllers\BarangController;
 use App\http\controllers\TransaksiMasukController;
+use App\http\controllers\TransaksiKeluarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,15 +34,28 @@ route::get('/supplier/hapus/{supplier}', [SupplierController::class, 'destroy'])
 Route::get('/supplier/edit/{supplier}', [SupplierController::class, 'edit'])->name('supplier.edit');
 Route::put('/supplier/update/{supplier}', [SupplierController::class, 'update'])->name('supplier.update');
 
-Route::get('/barang', [BarangController::class, 'index'])->name('barang.index');
-Route::get('/barang/hapus/{supplier}', [BarangController::class, 'destroy'])->name('barang.hapus');
-Route::post('/barang', [BarangController::class, 'store'])->name('barang.store');
-Route::get('/barang/edit/{barang}', [BarangController::class, 'edit'])->name('barang.edit');
-Route::put('/barang/update/{barang}', [BarangController::class, 'update'])->name('barang.update');
 
-Route::get('/transaksiMasuk', [TransaksiMasukController::class, 'index'])->name('transaksiMasuk.index');
-Route::post('/transaksiMasuk', [TransaksiMasukController::class, 'store'])->name('transaksiMasuk.store');
-Route::get('/transaksiMasuk/hapus/{transaksi}', [TransaksiMasukController::class, 'destroy'])->name('transaksiMasuk.hapus');
-Route::get('/transaksiMasuk/edit/{transaksi}', [TransaksiMasukController::class, 'edit'])->name('transaksiMasuk.edit');
-Route::put('/transaksiMasuk/update/{transaksi}', [TransaksiMasukController::class, 'update'])->name('transaksiMasuk.update');
+Route::prefix('barang')->group(function(){
+    Route::get('/', [BarangController::class, 'index'])->name('barang.index');
+    Route::post('/', [BarangController::class, 'store'])->name('barang.store');
+    Route::get('/hapus/{barang}', [BarangController::class, 'destroy'])->name('barang.hapus');
+    Route::get('/edit/{barang}', [BarangController::class, 'edit'])->name('barang.edit');
+    Route::put('/update/{barang}', [BarangController::class, 'update'])->name('barang.update');
+});
 
+
+Route::prefix('transaksiMasuk')->group(function(){
+    Route::get('/', [TransaksiMasukController::class, 'index'])->name('transaksiMasuk.index');
+    Route::post('/', [TransaksiMasukController::class, 'store'])->name('transaksiMasuk.store');
+    Route::get('/hapus/{transaksi}', [TransaksiMasukController::class, 'destroy'])->name('transaksiMasuk.hapus');
+    Route::get('/edit/{transaksi}', [TransaksiMasukController::class, 'edit'])->name('transaksiMasuk.edit');
+    Route::put('/update/{transaksi}', [TransaksiMasukController::class, 'update'])->name('transaksiMasuk.update');
+});
+
+Route::prefix('transaksiKeluar')->group(function(){
+    Route::get('/', [TransaksiKeluarController::class, 'index'])->name('transaksiKeluar.index');
+    Route::post('/', [TransaksiKeluarController::class, 'store'])->name('transaksiKeluar.store');
+    Route::get('/hapus/{transaksi}', [TransaksiKeluarController::class, 'destroy'])->name('transaksiKeluar.hapus');
+    Route::get('/edit/{transaksi}', [TransaksiKeluarController::class, 'edit'])->name('transaksiKeluar.edit');
+    Route::put('/update/{transaksi}', [TransaksiKeluarController::class, 'update'])->name('transaksiKeluar.update');
+});
