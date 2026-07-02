@@ -90,9 +90,7 @@
   </style>
 </head>
 <body>
-
 <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
-
 <div class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <div class="logo-circle">
@@ -127,7 +125,6 @@
     </a>
   </nav>
 </div>
-
 <div class="main">
   <div class="topbar">
     <div class="topbar-left">
@@ -142,7 +139,6 @@
       <a href="" class="btn-logout">Logout</a>
     </div>
   </div>
-
   <div class="content">
     <div class="page-header">
       <div class="page-title">Barang</div>
@@ -151,7 +147,6 @@
         Kategori
       </a>
     </div>
-
     @if ($errors->any())
     <div class="error-box">
       <ul style="padding-left:16px">
@@ -161,7 +156,6 @@
       </ul>
     </div>
     @endif
-
     <div class="card">
       <table class="tabel">
         <thead>
@@ -177,8 +171,6 @@
           </tr>
         </thead>
         <tbody>
-
-          {{-- ======= FORM TAMBAH ======= --}}
           <form action="{{ route('barang.store') }}" method="POST">
             @csrf
             <tr class="form-row">
@@ -203,12 +195,8 @@
               </td>
             </tr>
           </form>
-
-          {{-- ======= LOOP DATA ======= --}}
           @foreach ($barangs as $barang)
             @if(isset($editBarang) && $editBarang->id == $barang->id)
-
-              {{-- ======= FORM EDIT ======= --}}
               <form action="{{ route('barang.update', $barang) }}" method="POST">
                 @csrf
                 @method('PUT')
@@ -253,8 +241,6 @@
               </form>
 
             @else
-
-              {{-- ======= BARIS DATA NORMAL ======= --}}
               <tr>
                 <td style="color:#aaa;font-size:12px">{{ $loop->iteration }}</td>
                 <td><span class="badge-id">{{ $barang->kode_barang }}</span></td>
@@ -291,6 +277,5 @@
     document.getElementById('overlay').classList.remove('show');
   }
 </script>
-
 </body>
 </html>
