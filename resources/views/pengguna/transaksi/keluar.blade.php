@@ -107,7 +107,7 @@
   </div>
   <nav class="nav">
     <div class="nav-label">Menu</div>
-    <a class="nav-item" href="../../Dashboard/dashboard.html">
+    <a class="nav-item" href="{{ route('dashboard.index') }}">
       <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       Beranda
     </a>
@@ -153,7 +153,7 @@
     <div class="transaksi-tab">
       <a href="{{route('transaksiMasuk.index')}}" class="tab-btn">Transaksi Masuk</a>
       <a href="{{route('transaksiKeluar.index')}}" class="tab-btn active">Transaksi Keluar</a>
-      <a href="" class="tab-btn">Retur Barang</a>
+      <a href="{{route('transaksiRetur.index')}}" class="tab-btn">Retur Barang</a>
     </div>
 
     @if ($errors->any())

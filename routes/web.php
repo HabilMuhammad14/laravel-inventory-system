@@ -7,6 +7,8 @@ use App\http\controllers\BarangController;
 use App\http\controllers\TransaksiMasukController;
 use App\http\controllers\TransaksiKeluarController;
 use App\http\controllers\TransaksiReturController;
+use App\http\controllers\DashboardController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -68,3 +70,5 @@ Route::prefix('transaksiRetur')->group(function(){
     Route::get('/edit/{transaksi}', [TransaksiReturController::class, 'edit'])->name('transaksiRetur.edit');
     Route::put('/update/{transaksi}', [TransaksiReturController::class, 'update'])->name('transaksiRetur.update');
 });
+
+Route::get('/pengguna/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
