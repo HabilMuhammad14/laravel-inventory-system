@@ -82,11 +82,11 @@
   </div>
   <nav class="nav">
     <div class="nav-label">Menu</div>
-    <a class="nav-item" href="../Dashboard/dashboard.html">
+    <a class="nav-item" href="{{ route('dashboard.index') }}">
       <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       Beranda
     </a>
-    <a class="nav-item active" href="../kategoriPage/kategori.html">
+    <a class="nav-item active" href="{{ route('kategori.index') }}">
       <svg viewBox="0 0 24 24"><rect x="2" y="3" width="7" height="7"/><rect x="15" y="3" width="7" height="7"/><rect x="15" y="14" width="7" height="7"/><rect x="2" y="14" width="7" height="7"/></svg>
       Kategori
     </a>

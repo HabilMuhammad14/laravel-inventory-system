@@ -123,7 +123,7 @@
       <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
       Supplier
     </a>
-    <a class="nav-item" href="../../laporanStokPage/stok.html">
+    <a class="nav-item" href="{{ route('laporan-stok.index') }}">
       <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
       Laporan Stok
     </a>

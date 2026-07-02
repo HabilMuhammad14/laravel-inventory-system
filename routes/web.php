@@ -8,6 +8,7 @@ use App\http\controllers\TransaksiMasukController;
 use App\http\controllers\TransaksiKeluarController;
 use App\http\controllers\TransaksiReturController;
 use App\http\controllers\DashboardController;
+use App\http\controllers\LaporanStokController;
 
 
 /*
@@ -72,3 +73,4 @@ Route::prefix('transaksiRetur')->group(function(){
 });
 
 Route::get('/pengguna/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+Route::get('/pengguna/laporan-stok', [LaporanStokController::class, 'index'])->name('laporan-stok.index');
