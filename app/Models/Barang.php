@@ -17,4 +17,7 @@ class Barang extends Model
     public function transaksiKeluar(){
         return $this->hasMany(transaksiKeluar::class);
     }
+    public function transaksiRetur(){
+        return $this->hasMany(transaksiRetur::class);
+    }
 }

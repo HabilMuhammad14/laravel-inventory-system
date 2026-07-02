@@ -14,4 +14,7 @@ class Supplier extends Model
     public function transaksiMasuk(){
         return $this->hasMany(transaksiMasuk::class);
     }
+    public function transaksiRetur(){
+        return $this->hasMany(transaksiRetur::class);
+    }
 }

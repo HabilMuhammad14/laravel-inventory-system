@@ -49,4 +49,9 @@ class User extends Authenticatable
     public function transaksiKeluar(){
         return $this->hasMany(TransaksiKeluar::class);
     }
+
+    public function transaksiRetur(){
+        return $this->hasMany(TransaksiRetur::class);
+    }
+
 }

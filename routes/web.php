@@ -6,6 +6,7 @@ use App\http\controllers\SupplierController;
 use App\http\controllers\BarangController;
 use App\http\controllers\TransaksiMasukController;
 use App\http\controllers\TransaksiKeluarController;
+use App\http\controllers\TransaksiReturController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,4 +59,12 @@ Route::prefix('transaksiKeluar')->group(function(){
     Route::get('/hapus/{transaksi}', [TransaksiKeluarController::class, 'destroy'])->name('transaksiKeluar.hapus');
     Route::get('/edit/{transaksi}', [TransaksiKeluarController::class, 'edit'])->name('transaksiKeluar.edit');
     Route::put('/update/{transaksi}', [TransaksiKeluarController::class, 'update'])->name('transaksiKeluar.update');
+});
+
+Route::prefix('transaksiRetur')->group(function(){
+    Route::get('/', [TransaksiReturController::class, 'index'])->name('transaksiRetur.index');
+    Route::post('/', [TransaksiReturController::class, 'store'])->name('transaksiRetur.store');
+    Route::get('/hapus/{transaksi}', [TransaksiReturController::class, 'destroy'])->name('transaksiRetur.hapus');
+    Route::get('/edit/{transaksi}', [TransaksiReturController::class, 'edit'])->name('transaksiRetur.edit');
+    Route::put('/update/{transaksi}', [TransaksiReturController::class, 'update'])->name('transaksiRetur.update');
 });
