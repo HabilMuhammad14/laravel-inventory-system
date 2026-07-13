@@ -9,7 +9,9 @@ use App\Http\Controllers\TransaksiKeluarController;
 use App\Http\Controllers\TransaksiReturController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LaporanStokController;
-use App\Http\Controllers\Pemilik\DashboardController;
+use App\Http\Controllers\Pemilik\DashboardController as PemilikDashboardController;
+
+
 Route::get('/', function () {
     return redirect()->route('login');
 });
@@ -66,8 +68,8 @@ Route::middleware(['auth', 'pegawai'])->group(function () {
 });
 
 Route::middleware(['auth', 'pemilik'])->group(function(){
-    Route::get('/pemilik/dashboard', [DashboardController::class, 'index'])->name('pemilik.dashboard');
-})
+    Route::get('/pemilik/dashboard', [PemilikDashboardController::class, 'index'])->name('pemilik.dashboard');
+});
 
 Auth::routes(['register' => false]);
 
