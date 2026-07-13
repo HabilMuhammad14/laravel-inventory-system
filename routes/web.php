@@ -10,6 +10,7 @@ use App\Http\Controllers\TransaksiReturController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LaporanStokController;
 use App\Http\Controllers\Pemilik\DashboardController as PemilikDashboardController;
+use App\Http\Controllers\Pemilik\LaporanBarangController;
 
 
 Route::get('/', function () {
@@ -69,6 +70,7 @@ Route::middleware(['auth', 'pegawai'])->group(function () {
 
 Route::middleware(['auth', 'pemilik'])->group(function(){
     Route::get('/pemilik/dashboard', [PemilikDashboardController::class, 'index'])->name('pemilik.dashboard');
+    Route::get('/pemilik/laporan-barang', [LaporanBarangController::class, 'index'])->name('pemilik.laporan-barang');
 });
 
 Auth::routes(['register' => false]);
