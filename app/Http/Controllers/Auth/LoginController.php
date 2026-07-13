@@ -30,7 +30,7 @@ class LoginController extends Controller
         if (auth()->user()->role === 'pemilik') {
             return '/pemilik/dashboard';
         } elseif (auth()->user()->role === 'pegawai') {
-            return '/pegawai/dashboard';
+            return '/pengguna/dashboard';
         }
 
         return '/login'; // Redirect to login if the role is not recognized
