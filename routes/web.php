@@ -12,6 +12,7 @@ use App\Http\Controllers\LaporanStokController;
 use App\Http\Controllers\Pemilik\DashboardController as PemilikDashboardController;
 use App\Http\Controllers\Pemilik\LaporanBarangController;
 use App\Http\Controllers\Pemilik\LaporanTransaksiController;
+use App\Http\Controllers\Pemilik\LaporanStokController as PemilikLaporanStokController;
 
 
 Route::get('/', function () {
@@ -73,6 +74,7 @@ Route::middleware(['auth', 'pemilik'])->group(function(){
     Route::get('/pemilik/dashboard', [PemilikDashboardController::class, 'index'])->name('pemilik.dashboard');
     Route::get('/pemilik/laporan-barang', [LaporanBarangController::class, 'index'])->name('pemilik.laporan-barang');
     Route::get('/pemilik/laporan-transaksi', [LaporanTransaksiController::class, 'index'])->name('pemilik.laporan-transaksi');
+    Route::get('/pemilik/laporan-stok', [PemilikLaporanStokController::class, 'index'])->name('pemilik.laporan-stok');
 });
 
 Auth::routes(['register' => false]);
