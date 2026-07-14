@@ -13,6 +13,7 @@ use App\Http\Controllers\Pemilik\DashboardController as PemilikDashboardControll
 use App\Http\Controllers\Pemilik\LaporanBarangController;
 use App\Http\Controllers\Pemilik\LaporanTransaksiController;
 use App\Http\Controllers\Pemilik\LaporanStokController as PemilikLaporanStokController;
+use App\Http\Controllers\Pemilik\KelolaUserController;
 
 
 Route::get('/', function () {
@@ -75,6 +76,12 @@ Route::middleware(['auth', 'pemilik'])->group(function(){
     Route::get('/pemilik/laporan-barang', [LaporanBarangController::class, 'index'])->name('pemilik.laporan-barang');
     Route::get('/pemilik/laporan-transaksi', [LaporanTransaksiController::class, 'index'])->name('pemilik.laporan-transaksi');
     Route::get('/pemilik/laporan-stok', [PemilikLaporanStokController::class, 'index'])->name('pemilik.laporan-stok');
+    Route::get('/pemilik/kelola-user', [KelolaUserController::class, 'index'])->name('pemilik.kelola-user');
+    Route::post('/pemilik/kelola-user', [KelolaUserController::class, 'store'])->name('pemilik.kelola-user.store');
+    Route::get('/pemilik/kelola-user/hapus/{user}', [KelolaUserController::class, 'destroy'])->name('pemilik.kelola-user.hapus');
+    Route::get('/pemilik/kelola-user/edit/{user}', [KelolaUserController::class, 'edit'])->name('pemilik.kelola-user.edit');
+    Route::put('/pemilik/kelola-user/update/{user}', [KelolaUserController::class, 'update'])->name('pemilik.kelola-user.update');
+
 });
 
 Auth::routes(['register' => false]);
