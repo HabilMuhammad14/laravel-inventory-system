@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Laporan Barang</title>
+  <title>Laporan Supplier</title>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:Arial,sans-serif;display:flex;min-height:100vh;background:#f5f5f3}
@@ -41,30 +41,20 @@
     .btn-cetak svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
     .btn-cetak:hover{background:#1648c0}
 
-    .summary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:20px}
+    .summary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-bottom:20px}
     .summary-card{background:#fff;border:1px solid #e5e5e5;border-radius:10px;padding:16px}
     .summary-title{font-size:11.5px;color:#999;margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em}
     .summary-value{font-size:26px;font-weight:300;color:#222;font-variant-numeric:tabular-nums}
     .summary-card.blue .summary-value{color:#1a56db}
-    .summary-card.purple .summary-value{color:#7c3aed}
-    .summary-card.green .summary-value{color:#16a34a}
-    .summary-card.orange .summary-value{color:#d97706}
-    .summary-card.red .summary-value{color:#b91c1c}
 
     .card{background:#fff;border:1px solid #e5e5e5;border-radius:12px;overflow:hidden;overflow-x:auto}
-    .tabel{width:100%;border-collapse:collapse;font-size:13px;min-width:580px}
+    .tabel{width:100%;border-collapse:collapse;font-size:13px;min-width:500px}
     .tabel thead tr{background:#fafaf9}
     .tabel th{padding:11px 14px;text-align:left;font-size:11px;font-weight:600;color:#aaa;letter-spacing:.05em;text-transform:uppercase;border-bottom:1px solid #eee;white-space:nowrap}
-    .tabel th.num{text-align:right}
     .tabel td{padding:11px 14px;border-bottom:1px solid #f0f0f0;color:#333;vertical-align:middle}
-    .tabel td.num{text-align:right;font-variant-numeric:tabular-nums}
     .tabel tbody tr:last-child td{border-bottom:none}
     .tabel tbody tr:hover td{background:#fafcff}
     .badge-id{display:inline-block;background:#f5f5f3;border:1px solid #e5e5e5;border-radius:5px;padding:2px 8px;font-size:11.5px;font-family:monospace;color:#666}
-    .badge-stok{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11.5px;font-weight:500}
-    .badge-stok.aman{background:#dcfce7;color:#16a34a}
-    .badge-stok.menipis{background:#fef9c3;color:#854d0e}
-    .badge-stok.habis{background:#fee2e2;color:#b91c1c}
 
     .hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px}
     .hamburger span{display:block;width:20px;height:2px;background:#555;margin:4px 0;border-radius:2px}
@@ -75,7 +65,7 @@
       .main{display:block}
       .content{padding:0}
       .card{border:none;border-radius:0}
-      .summary-grid{grid-template-columns:repeat(5,1fr)}
+      .summary-grid{grid-template-columns:repeat(1,1fr)}
     }
     @media(max-width:768px){
       .sidebar{position:fixed;inset:0 auto 0 0;z-index:100;transform:translateX(-100%)}
@@ -86,17 +76,16 @@
       .topbar-title{font-size:12px}
       .content{padding:16px 12px}
       .page-title{font-size:22px}
-      .summary-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
     }
     @media(max-width:480px){
       .topbar{padding:11px 12px}
-      .summary-grid{grid-template-columns:1fr 1fr}
     }
   </style>
 </head>
 <body>
 
 <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
 
 <div class="sidebar" id="sidebar">
   <div class="sidebar-header">
@@ -114,7 +103,7 @@
       <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       Beranda
     </a>
-    <a class="nav-item active" href="{{route('pemilik.laporan-barang')}}">
+    <a class="nav-item " href="{{route('pemilik.laporan-barang')}}">
       <svg viewBox="0 0 24 24"><rect x="2" y="3" width="7" height="7"/><rect x="15" y="3" width="7" height="7"/><rect x="15" y="14" width="7" height="7"/><rect x="2" y="14" width="7" height="7"/></svg>
       Laporan Barang
     </a>
@@ -126,12 +115,13 @@
       <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
       Laporan Stok
     </a>
-    <a class="nav-item" href="{{route('pemilik.laporan-supplier')}}">
+    <a class="nav-item active" href="{{route('pemilik.laporan-supplier')}}">
       <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
       Supplier
     </a>
   </nav>
 </div>
+
 <div class="main">
   <div class="topbar">
     <div class="topbar-left">
@@ -151,8 +141,8 @@
   <div class="content">
     <div class="page-header">
       <div>
-        <div class="page-title">Laporan Barang</div>
-        <div class="page-sub">Informasi seluruh data barang toko.</div>
+        <div class="page-title">Laporan Supplier</div>
+        <div class="page-sub">Informasi supplier toko sembako.</div>
       </div>
       <button class="btn-cetak" onclick="window.print()">
         <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
@@ -162,24 +152,8 @@
 
     <div class="summary-grid">
       <div class="summary-card blue">
-        <div class="summary-title">Jumlah Barang</div>
-        <div class="summary-value">{{ $totalBarang }}</div>
-      </div>
-      <div class="summary-card purple">
-        <div class="summary-title">Kategori</div>
-        <div class="summary-value">{{ $totalKategori }}</div>
-      </div>
-      <div class="summary-card green">
-        <div class="summary-title">Barang Aman</div>
-        <div class="summary-value">{{ $barangAman }}</div>
-      </div>
-      <div class="summary-card orange">
-        <div class="summary-title">Stok Menipis</div>
-        <div class="summary-value">{{ $stokMenipis }}</div>
-      </div>
-      <div class="summary-card red">
-        <div class="summary-title">Barang Habis</div>
-        <div class="summary-value">{{ $barangHabis }}</div>
+        <div class="summary-title">Total Supplier</div>
+        <div class="summary-value">{{ $totalSupplier }}</div>
       </div>
     </div>
 
@@ -188,29 +162,26 @@
         <thead>
           <tr>
             <th style="width:36px">#</th>
-            <th style="width:100px">ID Barang</th>
-            <th style="min-width:150px">Nama Barang</th>
-            <th style="width:120px">Kategori</th>
-            <th style="width:90px">Satuan</th>
-            <th class="num" style="width:110px">Harga</th>
-            <th class="num" style="width:80px">Stok</th>
+            <th style="width:110px">ID Supplier</th>
+            <th style="min-width:160px">Nama Supplier</th>
+            <th style="min-width:140px">Alamat</th>
+            <th style="width:130px">No Telepon</th>
           </tr>
         </thead>
         <tbody>
-          @foreach($barangs as $barang)
-          @php
-            $stokClass = $barang->stok <= 0 ? 'habis' : ($barang->stok <= 20 ? 'menipis' : 'aman');
-          @endphp
+          @forelse($suppliers as $supplier)
           <tr>
             <td style="color:#aaa;font-size:12px">{{ $loop->iteration }}</td>
-            <td><span class="badge-id">{{ $barang->kode_barang }}</span></td>
-            <td>{{ $barang->nama_barang }}</td>
-            <td>{{ $barang->kategori->nama_kategori ?? '-' }}</td>
-            <td>{{ $barang->satuan }}</td>
-            <td class="num">Rp {{ number_format($barang->harga, 0, ',', '.') }}</td>
-            <td class="num"><span class="badge-stok {{ $stokClass }}">{{ $barang->stok }}</span></td>
+            <td><span class="badge-id">{{ $supplier->id_supplier }}</span></td>
+            <td>{{ $supplier->nama_supplier }}</td>
+            <td>{{ $supplier->alamat }}</td>
+            <td>{{ $supplier->no_telepon }}</td>
           </tr>
-          @endforeach
+          @empty
+          <tr>
+            <td colspan="5" style="text-align:center;color:#aaa;padding:20px">Belum ada data supplier</td>
+          </tr>
+          @endforelse
         </tbody>
       </table>
     </div>

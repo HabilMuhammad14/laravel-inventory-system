@@ -4,6 +4,8 @@ namespace App\Http\Controllers\pemilik;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Barang;
+use App\Models\Kategori;
 
 class LaporanBarangController extends Controller
 {

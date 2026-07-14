@@ -14,6 +14,7 @@ use App\Http\Controllers\Pemilik\LaporanBarangController;
 use App\Http\Controllers\Pemilik\LaporanTransaksiController;
 use App\Http\Controllers\Pemilik\LaporanStokController as PemilikLaporanStokController;
 use App\Http\Controllers\Pemilik\KelolaUserController;
+use App\Http\Controllers\Pemilik\LaporanSupplierController;
 
 
 Route::get('/', function () {
@@ -81,6 +82,7 @@ Route::middleware(['auth', 'pemilik'])->group(function(){
     Route::get('/pemilik/kelola-user/hapus/{user}', [KelolaUserController::class, 'destroy'])->name('pemilik.kelola-user.hapus');
     Route::get('/pemilik/kelola-user/edit/{user}', [KelolaUserController::class, 'edit'])->name('pemilik.kelola-user.edit');
     Route::put('/pemilik/kelola-user/update/{user}', [KelolaUserController::class, 'update'])->name('pemilik.kelola-user.update');
+    Route::get('/pemilik/laporan-supplier', [LaporanSupplierController::class, 'index'])->name('pemilik.laporan-supplier');
 
 });
 

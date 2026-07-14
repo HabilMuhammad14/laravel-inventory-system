@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Pemilik;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Barang;
+use App\Models\Supplier;
+use App\Models\TransaksiMasuk;
+use App\Models\TransaksiKeluar;
 
 class DashboardController extends Controller
 {

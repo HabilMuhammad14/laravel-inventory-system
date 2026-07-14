@@ -4,6 +4,10 @@ namespace App\Http\Controllers\pemilik;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Barang;
+use App\Models\TransaksiMasuk;
+use App\Models\TransaksiKeluar;
+use App\Models\TransaksiRetur;
 
 class LaporanStokController extends Controller
 {

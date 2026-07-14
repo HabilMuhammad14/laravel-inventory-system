@@ -4,6 +4,9 @@ namespace App\Http\Controllers\pemilik;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\TransaksiMasuk;
+use App\Models\TransaksiKeluar;
+use App\Models\TransaksiRetur;
 
 class LaporanTransaksiController extends Controller
 {
@@ -12,7 +15,7 @@ class LaporanTransaksiController extends Controller
          $transaksiMasuks = TransaksiMasuk::with(['barang', 'supplier', 'user'])->get();
          $transaksiKeluars = TransaksiKeluar::with(['barang', 'user'])->get();
          $transaksiReturs  = TransaksiRetur::with(['barang', 'supplier', 'user'])->get();
-     
+
          $semua = collect()
              ->merge($transaksiMasuks->map(fn($t) => (object)[
                  'kode'       => $t->kode_transaksi_masuk,
@@ -45,7 +48,7 @@ class LaporanTransaksiController extends Controller
                  'keterangan' => $t->keterangan,
              ]))
              ->sortBy('tanggal');
-     
+
          return view('pemilik.laporan-transaksi', [
              'transaksis'    => $semua,
              'totalTransaksi'=> $semua->count(),

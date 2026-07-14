@@ -35,7 +35,7 @@ class KelolaUserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:8',
             'role' => 'required|in:pemilik,pegawai',
         ]);
 
@@ -46,7 +46,7 @@ class KelolaUserController extends Controller
             'role' => $request->role,
             ]);
 
-        return redirect()->route('pemilik.kelola-user.index')->with('success', 'User berhasil ditambahkan.');
+        return redirect()->route('pemilik.kelola-user')->with('success', 'User berhasil ditambahkan.');
         }
 
     /**
@@ -79,7 +79,7 @@ class KelolaUserController extends Controller
             ]);
 
             $user->update($validated);
-            return redirect()->route('pemilik.kelola-user.index')->with('success', 'User berhasil diperbarui.');
+            return redirect()->route('pemilik.kelola-user')->with('success', 'User berhasil diperbarui.');
 
     }
 
@@ -89,6 +89,6 @@ class KelolaUserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('pemilik.kelola-user.index')->with('success', 'User berhasil dihapus.');
+        return redirect()->route('pemilik.kelola-user')->with('success', 'User berhasil dihapus.');
     }
 }
