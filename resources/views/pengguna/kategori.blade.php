@@ -92,7 +92,6 @@
     </a>
   </nav>
 </div>
-
 <div class="main">
   <div class="topbar">
     <div style="display:flex;align-items:center;gap:10px;min-width:0">
@@ -104,15 +103,16 @@
     <div class="topbar-user">
       <div class="avatar">HM</div>
       <span class="user-name">Habil Muhammad</span>
-      <a href="/LoginPage/login.html" class="btn-logout">Logout</a>
+      <form action="{{ route('logout') }}" method="POST" style="display:inline">
+        @csrf
+        <button type="submit" class="btn-logout">Logout</button>
+      </form>
     </div>
   </div>
-
   <div class="content">
     <div class="page-header">
       <div class="page-title">Kategori Barang</div>
     </div>
-
     @if ($errors->any())
     <div class="error-box">
       <ul style="padding-left:16px">
@@ -122,7 +122,6 @@
       </ul>
     </div>
     @endif
-
     <div class="card">
       <table class="tabel">
         <thead>
@@ -134,7 +133,6 @@
           </tr>
         </thead>
         <tbody>
-
           <form action="{{route('kategori.store')}}" method="post">
             @csrf
             <tr class="form-row">
@@ -149,7 +147,6 @@
               </td>
             </tr>
           </form>
-
           @foreach ($kategoris as $kategori)
             @if(isset($editKategori) && $editKategori->id == $kategori->id)
               <form action="{{ route('kategori.update', $kategori) }}" method="POST">
@@ -181,14 +178,12 @@
               </tr>
             @endif
           @endforeach
-
         </tbody>
       </table>
     </div>
 
   </div>
 </div>
-
 <script>
   function openSidebar(){
     document.getElementById('sidebar').classList.add('open');

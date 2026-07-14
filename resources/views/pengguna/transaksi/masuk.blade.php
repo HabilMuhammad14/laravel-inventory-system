@@ -129,7 +129,6 @@
     </a>
   </nav>
 </div>
-
 <div class="main">
   <div class="topbar">
     <div class="topbar-left">
@@ -141,21 +140,21 @@
     <div class="topbar-user">
       <div class="avatar">HM</div>
       <span class="user-name">Habil Muhammad</span>
-      <a href="" class="btn-logout">Logout</a>
+       <form action="{{ route('logout') }}" method="POST" style="display:inline">
+         @csrf
+         <button type="submit" class="btn-logout">Logout</button>
+       </form>
     </div>
   </div>
-
   <div class="content">
     <div class="page-header">
       <div class="page-title">Transaksi Masuk</div>
     </div>
-
     <div class="transaksi-tab">
       <a href="{{route('transaksiMasuk.index')}}" class="tab-btn active">Transaksi Masuk</a>
       <a href="{{route('transaksiKeluar.index')}}" class="tab-btn">Transaksi Keluar</a>
-      <a href="" class="tab-btn">Retur Barang</a>
+      <a href="{{route('transaksiRetur.index')}}" class="tab-btn">Retur Barang</a>
     </div>
-
     @if ($errors->any())
     <div class="error-box">
       <ul style="padding-left:16px">
@@ -165,7 +164,6 @@
       </ul>
     </div>
     @endif
-
     <div class="card">
       <table class="tabel">
         <thead>
@@ -182,8 +180,6 @@
           </tr>
         </thead>
         <tbody>
-
-          {{-- ======= FORM TAMBAH ======= --}}
           <form action="{{route('transaksiMasuk.store')}}" method="POST">
             @csrf
             <tr class="form-row">
@@ -221,13 +217,8 @@
               </td>
             </tr>
           </form>
-
-          {{-- ======= LOOP DATA ======= --}}
           @foreach ($transaksis as $transaksi)
             @if(isset($editTransaksi) && $editTransaksi->id == $transaksi->id)
-
-              {{-- ======= FORM EDIT ======= --}}
-{{-- ======= FORM EDIT ======= --}}
               <form action="{{route('transaksiMasuk.update', $transaksi)}}" method="POST">
                 @csrf
                 @method('PUT')
@@ -288,8 +279,6 @@
                 </tr>
               </form>
             @else
-
-              {{-- ======= BARIS DATA NORMAL ======= --}}
               <tr>
                 <td style="color:#aaa;font-size:12px">{{ $loop->iteration }}</td>
                 <td><span class="badge-id">{{ $transaksi->kode_transaksi_masuk }}</span></td>
@@ -306,17 +295,13 @@
                   </div>
                 </td>
               </tr>
-
             @endif
           @endforeach
-
         </tbody>
       </table>
     </div>
-
   </div>
 </div>
-
 <script>
   function openSidebar(){
     document.getElementById('sidebar').classList.add('open');
@@ -327,6 +312,5 @@
     document.getElementById('overlay').classList.remove('show');
   }
 </script>
-
 </body>
 </html>

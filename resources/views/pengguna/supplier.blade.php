@@ -140,15 +140,16 @@
     <div class="topbar-user">
       <div class="avatar">HM</div>
       <span class="user-name">Habil Muhammad</span>
-      <a href="/LoginPage/login.html" class="btn-logout">Logout</a>
+      <a href="{{ route('logout') }}" class="btn-logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+      </form>
     </div>
   </div>
-
   <div class="content">
     <div class="page-header">
       <div class="page-title">Supplier</div>
     </div>
-
     @if ($errors->any())
     <div class="error-box">
       <ul style="padding-left:16px">
@@ -158,7 +159,6 @@
       </ul>
     </div>
     @endif
-
     <div class="card">
       <table class="tabel">
         <thead>
@@ -172,7 +172,6 @@
           </tr>
         </thead>
         <tbody>
-
           <form action="{{route('supplier.store')}}" method="post">
             @csrf
             <tr class="input-row">
@@ -184,7 +183,6 @@
               <td><button class="btn-simpan" type="submit">Simpan</button></td>
             </tr>
           </form>
-
           @foreach ($suppliers as $supplier)
             @if (isset($editSupplier) && $editSupplier->id == $supplier->id)
               <form action="{{ route('supplier.update', $supplier) }}" method="POST">
@@ -232,14 +230,11 @@
               </tr>
             @endif
           @endforeach
-
         </tbody>
       </table>
     </div>
-
   </div>
 </div>
-
 <script>
   function openSidebar(){
     document.getElementById('sidebar').classList.add('open');
@@ -250,6 +245,5 @@
     document.getElementById('overlay').classList.remove('show');
   }
 </script>
-
 </body>
 </html>

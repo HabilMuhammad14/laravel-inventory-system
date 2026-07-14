@@ -143,11 +143,13 @@
     <div class="topbar-user">
       <div class="avatar">HM</div>
       <span class="user-name">Habil Muhammad</span>
-      <a href="" class="btn-user">Kelola User</a>
-      <a href="" class="btn-logout">Logout</a>
+      <a href="{{route('pemilik.kelola-user')}}" class="btn-user">Kelola User</a>
+      <form action="{{ route('logout') }}" method="POST" style="display:inline">
+        @csrf
+        <button type="submit" class="btn-logout">Logout</button>
+      </form>
     </div>
   </div>
-
   <div class="content">
     <div class="page-header">
       <div>
@@ -159,7 +161,6 @@
         Cetak Laporan
       </button>
     </div>
-
     <div class="summary-grid">
       <div class="summary-card blue">
         <div class="summary-title">Jumlah Barang</div>
@@ -182,7 +183,6 @@
         <div class="summary-value">{{ $barangHabis }}</div>
       </div>
     </div>
-
     <div class="card">
       <table class="tabel">
         <thead>
@@ -214,10 +214,8 @@
         </tbody>
       </table>
     </div>
-
   </div>
 </div>
-
 <script>
   function openSidebar(){
     document.getElementById('sidebar').classList.add('open');

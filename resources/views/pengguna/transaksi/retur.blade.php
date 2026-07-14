@@ -129,7 +129,6 @@
     </a>
   </nav>
 </div>
-
 <div class="main">
   <div class="topbar">
     <div class="topbar-left">
@@ -141,21 +140,21 @@
     <div class="topbar-user">
       <div class="avatar">HM</div>
       <span class="user-name">Habil Muhammad</span>
-      <a href="" class="btn-logout">Logout</a>
+      <form action="{{ route('logout') }}" method="POST" style="display:inline">
+        @csrf
+        <button type="submit" class="btn-logout">Logout</button>
+      </form>
     </div>
   </div>
-
   <div class="content">
     <div class="page-header">
       <div class="page-title">Retur Barang</div>
     </div>
-
     <div class="transaksi-tab">
-      <a href="" class="tab-btn">Transaksi Masuk</a>
-      <a href="" class="tab-btn">Transaksi Keluar</a>
-      <a href="" class="tab-btn active">Retur Barang</a>
+      <a href="{{ route('transaksiMasuk.index') }}" class="tab-btn">Transaksi Masuk</a>
+      <a href="{{ route('transaksiKeluar.index') }}" class="tab-btn">Transaksi Keluar</a>
+      <a href="{{ route('transaksiRetur.index') }}" class="tab-btn active">Retur Barang</a>
     </div>
-
     @if ($errors->any())
     <div class="error-box">
       <ul style="padding-left:16px">
@@ -165,7 +164,6 @@
       </ul>
     </div>
     @endif
-
     <div class="card">
       <table class="tabel">
         <thead>
@@ -182,9 +180,7 @@
           </tr>
         </thead>
         <tbody>
-
-          {{-- ======= FORM TAMBAH ======= --}}
-          <form action="" method="POST">
+          <form action="{{route('transaksiReturController.store')}}" method="POST">
             @csrf
             <tr class="form-row">
               <td style="color:#aaa;font-size:12px">#</td>
@@ -217,16 +213,6 @@
                 <div class="aksi-group">
                   <button class="btn-simpan" type="submit">Simpan</button>
                   <button class="btn-batal" type="reset">Batal</button>
-                </div>
-              </td>
-            </tr>
-          </form>
-
-          {{-- ======= LOOP DATA ======= --}}
-          @foreach ($returs as $retur)
-            @if(isset($editRetur) && $editRetur->id == $retur->id)
-
-              {{-- ======= FORM EDIT ======= --}}
               <form action="{{ route('transaksiRetur.update', $retur) }}" method="POST">
                 @csrf
                 @method('PUT')
@@ -281,15 +267,12 @@
                   <td>
                     <div class="aksi-group">
                       <button type="submit" class="btn-simpan">Simpan</button>
-                      <a href="" class="btn-batal">Batal</a>
+                      <a href="{{route('transaksiRetur.index')}}" class="btn-batal">Batal</a>
                     </div>
                   </td>
                 </tr>
               </form>
-
             @else
-
-              {{-- ======= BARIS DATA NORMAL ======= --}}
               <tr>
                 <td style="color:#aaa;font-size:12px">{{ $loop->iteration }}</td>
                 <td><span class="badge-id">{{ $retur->kode_transaksi_retur }}</span></td>
@@ -306,17 +289,13 @@
                   </div>
                 </td>
               </tr>
-
             @endif
           @endforeach
-
         </tbody>
       </table>
     </div>
-
   </div>
 </div>
-
 <script>
   function openSidebar(){
     document.getElementById('sidebar').classList.add('open');

@@ -136,7 +136,10 @@
     <div class="topbar-user">
       <div class="avatar">HM</div>
       <span class="user-name">Habil Muhammad</span>
-      <a href="" class="btn-logout">Logout</a>
+      <form action="{{ route('logout') }}" method="POST" style="display:inline">
+        @csrf
+        <button type="submit" class="btn-logout">Logout</button>
+      </form>
     </div>
   </div>
   <div class="content">
@@ -239,7 +242,6 @@
                   </td>
                 </tr>
               </form>
-
             @else
               <tr>
                 <td style="color:#aaa;font-size:12px">{{ $loop->iteration }}</td>
@@ -256,17 +258,13 @@
                   </div>
                 </td>
               </tr>
-
             @endif
           @endforeach
-
         </tbody>
       </table>
     </div>
-
   </div>
 </div>
-
 <script>
   function openSidebar(){
     document.getElementById('sidebar').classList.add('open');

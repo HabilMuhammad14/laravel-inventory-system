@@ -76,7 +76,6 @@
     .hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px}
     .hamburger span{display:block;width:20px;height:2px;background:#555;margin:4px 0;border-radius:2px}
     .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:99}
-
     @media(max-width:768px){
       .sidebar{position:fixed;inset:0 auto 0 0;z-index:100;transform:translateX(-100%)}
       .sidebar.open{transform:translateX(0)}
@@ -93,9 +92,7 @@
   </style>
 </head>
 <body>
-
 <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
-
 <div class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <div class="logo-circle">
@@ -130,7 +127,6 @@
     </a>
   </nav>
 </div>
-
 <div class="main">
   <div class="topbar">
     <div class="topbar-left">
@@ -143,16 +139,17 @@
       <div class="avatar">HM</div>
       <span class="user-name">Habil Muhammad</span>
       <a href="{{route('pemilik.kelola-user')}}" class="btn-user">Kelola User</a>
-      <a href="" class="btn-logout">Logout</a>
+      <form action="{{ route('logout') }}" method="POST" style="display:inline">
+       @csrf
+       <button type="submit" class="btn-logout">Logout</button>
+       </form>
     </div>
   </div>
-
   <div class="content">
     <div class="page-header">
       <div class="page-title">Kelola User</div>
       <div class="page-sub">Tambah dan kelola akun pegawai sistem inventaris.</div>
     </div>
-
     @if ($errors->any())
     <div class="error-box">
       <ul style="padding-left:16px">
@@ -162,10 +159,9 @@
       </ul>
     </div>
     @endif
-
     <div class="card">
       <table class="tabel">
-<thead>
+        <thead>
           <tr>
             <th style="width:36px">#</th>
             <th style="min-width:140px">Nama</th>
@@ -176,8 +172,6 @@
           </tr>
         </thead>
         <tbody>
-
-          {{-- ======= FORM TAMBAH ======= --}}
           <form action="{{route('pemilik.kelola-user.store')}}" method="POST">
             @csrf
             <tr class="form-row">
@@ -208,12 +202,8 @@
               </td>
             </tr>
           </form>
-
-          {{-- ======= LOOP DATA ======= --}}
           @foreach($users as $user)
             @if(isset($editUser) && $editUser->id == $user->id)
-
-              {{-- ======= FORM EDIT ======= --}}
               <form action="{{route('pemilik.kelola-user.update', $user)}}" method="POST">
                 @csrf
                 @method('PUT')
@@ -263,10 +253,8 @@
         </tbody>
      </table>
     </div>
-
   </div>
 </div>
-
 <script>
   function openSidebar(){
     document.getElementById('sidebar').classList.add('open');
@@ -277,6 +265,5 @@
     document.getElementById('overlay').classList.remove('show');
   }
 </script>
-
 </body>
 </html>

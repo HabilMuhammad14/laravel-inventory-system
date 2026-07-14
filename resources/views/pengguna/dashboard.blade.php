@@ -65,9 +65,7 @@
   </style>
 </head>
 <body>
-
 <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
-
 <div class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <div class="logo-circle">
@@ -102,7 +100,6 @@
     </a>
   </nav>
 </div>
-
 <div class="main">
   <div class="topbar">
     <div class="topbar-left">
@@ -114,14 +111,15 @@
     <div class="topbar-user">
       <div class="avatar">HM</div>
       <span class="user-name">Habil Muhammad</span>
-      <a href="" class="btn-logout">Logout</a>
+      <form action="{{ route('logout') }}" method="POST" style="display:inline">
+        @csrf
+        <button type="submit" class="btn-logout">Logout</button>
+      </form>
     </div>
   </div>
-
   <div class="content">
     <div class="page-title">Beranda</div>
     <div class="page-sub">Selamat datang! Pilih menu di bawah untuk mulai bekerja.</div>
-
     <div class="grid">
       <a class="card" href="">
         <div class="card-icon">
@@ -154,7 +152,6 @@
     </div>
   </div>
 </div>
-
 <script>
   function openSidebar(){
     document.getElementById('sidebar').classList.add('open');
