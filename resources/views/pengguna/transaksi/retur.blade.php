@@ -213,11 +213,17 @@
                 <div class="aksi-group">
                   <button class="btn-simpan" type="submit">Simpan</button>
                   <button class="btn-batal" type="reset">Batal</button>
-              <form action="{{ route('transaksiRetur.update', $retur) }}" method="POST">
-                @csrf
-                @method('PUT')
-                <tr class="edit-row">
-                  <td style="color:#aaa;font-size:12px">{{ $loop->iteration }}</td>
+                </div>
+              </td>
+            </tr>
+          </form>
+          @foreach($returs as $retur)
+            @if($retur->id == old('edit_id', $editId))
+          <form action="{{ route('transaksiRetur.update', $retur) }}" method="POST">
+            @csrf
+            @method('PUT')
+            <tr class="edit-row">
+              <td style="color:#aaa;font-size:12px">{{ $loop->iteration }}</td>
                   <td>
                     <input type="text" class="form-input {{ $errors->has('kode_transaksi_retur') ? 'input-error' : '' }}" name="kode_transaksi_retur" value="{{ old('kode_transaksi_retur', $retur->kode_transaksi_retur) }}">
                     @error('kode_transaksi_retur')<span class="error-text">{{ $message }}</span>@enderror

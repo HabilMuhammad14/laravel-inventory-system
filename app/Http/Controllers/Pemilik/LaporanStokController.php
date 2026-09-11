@@ -24,7 +24,7 @@ class LaporanStokController extends Controller
         $totalRetur  = TransaksiRetur::sum('jumlah');
         $totalStok   = Barang::sum('stok');
 
-        return view('pemilik.laporan-stok', compact(
+        return view('pemilik.Laporan-stok', compact(
             'barangs',
             'totalBarang',
             'totalMasuk',

@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\TransaksiMasuk;
+use App\Models\TransaksiKeluar;
+use App\Models\TransaksiRetur;
 
 class Barang extends Model
 {
