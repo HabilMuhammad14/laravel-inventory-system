@@ -40,6 +40,7 @@ class BarangController extends Controller
             'satuan' => 'required|string|max:20',
             'harga' => 'required|numeric|min:0',
             'stok' => 'required|integer|min:0',
+            'stok_minimum' =>'required|integer|min:0'
         ]);
         Barang::create($validated);
         return redirect()->route('barang.index');
@@ -75,6 +76,7 @@ class BarangController extends Controller
                 'satuan' => 'required|string|max:20',
                 'harga' => 'required|numeric|min:0',
                 'stok' => 'required|integer|min:0',
+                'stok_minimum' => 'required|integer|min:0'
             ]);
             $barang->update($validated);
             return redirect()->route('barang.index');

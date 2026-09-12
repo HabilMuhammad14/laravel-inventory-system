@@ -175,7 +175,7 @@
             <th style="width:80px">Jumlah</th>
             <th style="width:120px">Supplier</th>
             <th style="width:80px">ID User</th>
-            <th style="min-width:120px">Keterangan</th>
+            <th style="min-width:120px">Alasan Retur</th>
             <th style="width:120px">Aksi</th>
           </tr>
         </thead>
@@ -208,7 +208,14 @@
                   @endforeach
                 </select>
               </td>
-              <td><input type="text" class="form-input" placeholder="Keterangan" name="keterangan"></td>
+              <td>
+                <select class='form-select' name='alasan_retur'>
+                  <option value='rusak'>Rusak</option>
+                  <option value='hilang'>Hilang</option>
+                  <option value='salah_kirim'>Salah Kirim</option>
+                  <option value='lainnya'>Lainnya</option>
+                  </select>
+              </td>
               <td>
                 <div class="aksi-group">
                   <button class="btn-simpan" type="submit">Simpan</button>
@@ -218,7 +225,7 @@
             </tr>
           </form>
           @foreach($returs as $retur)
-            @if($retur->id == old('edit_id', $editId))
+            @if(isset($editRetur) && $editRetur->id == $retur->id)
           <form action="{{ route('transaksiRetur.update', $retur) }}" method="POST">
             @csrf
             @method('PUT')
@@ -267,8 +274,13 @@
                     @error('user_id')<span class="error-text">{{ $message }}</span>@enderror
                   </td>
                   <td>
-                    <input type="text" class="form-input {{ $errors->has('keterangan') ? 'input-error' : '' }}" name="keterangan" value="{{ old('keterangan', $retur->keterangan) }}">
-                    @error('keterangan')<span class="error-text">{{ $message }}</span>@enderror
+                    <select class="form-select {{ $errors->has('alasan_retur') ? 'input-error' : '' }}" name="alasan_retur">
+                      <option value="rusak" {{ old('alasan_retur', $retur->alasan_retur) == 'rusak' ? 'selected' : '' }}>Rusak</option>
+                      <option value="hilang" {{ old('alasan_retur', $retur->alasan_retur) == 'hilang' ? 'selected' : '' }}>Hilang</option>
+                      <option value="salah_kirim" {{ old('alasan_retur', $retur->alasan_retur) == 'salah_kirim' ? 'selected' : '' }}>Salah Kirim</option>
+                      <option value="lainnya" {{ old('alasan_retur', $retur->alasan_retur) == 'lainnya' ? 'selected' : '' }}>Lainnya</option>
+                    </select>
+                    @error('alasan_retur')<span class="error-text">{{ $message }}</span>@enderror
                   </td>
                   <td>
                     <div class="aksi-group">
@@ -287,7 +299,7 @@
                 <td>{{ $retur->jumlah }}</td>
                 <td>{{ $retur->supplier->id_supplier ?? '-' }}</td>
                 <td>{{ $retur->user->id ?? '-' }}</td>
-                <td>{{ $retur->keterangan }}</td>
+                <td>{{ $retur->alasan_retur }}</td>
                 <td>
                   <div class="aksi-group">
                     <a href="{{route('transaksiRetur.edit', $retur)}}" class="btn-edit">Edit</a>

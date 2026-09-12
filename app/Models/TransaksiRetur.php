@@ -9,7 +9,7 @@ class TransaksiRetur extends Model
 {
     use HasFactory;
     protected $table = 'transaksi_retur';
-    protected $fillable= ['kode_transaksi_retur', 'barang_id', 'supplier_id', 'user_id', 'tanggal', 'jumlah', 'keterangan'];
+    protected $fillable= ['kode_transaksi_retur', 'barang_id', 'supplier_id', 'user_id', 'tanggal', 'jumlah', 'keterangan', 'alasan_retur'];
 
     public function user(){
         return $this->belongsTo(User::class);

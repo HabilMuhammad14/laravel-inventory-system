@@ -45,7 +45,7 @@ class TransaksiReturController extends Controller
         'user_id' => 'required|exists:users,id',
         'tanggal' => 'required|date',
         'jumlah' => 'required|integer|min:1',
-        'keterangan' => 'nullable|string',
+        'alasan_retur' => 'nullable|string',
       ]);
       TransaksiRetur::create($validated);
       return redirect()->route('transaksiRetur.index');
@@ -83,7 +83,7 @@ class TransaksiReturController extends Controller
           'user_id' => 'required|exists:users,id',
           'tanggal' => 'required|date',
           'jumlah' => 'required|integer|min:1',
-          'keterangan' => 'nullable|string',
+          'alasan_retur' => 'nullable|string',
         ]);
         $transaksi->update($validated);
         return redirect()->route('transaksiRetur.index');

@@ -170,6 +170,7 @@
             <th style="width:90px">Satuan</th>
             <th style="width:110px">Harga</th>
              <th style="width:80px">Stok</th>
+             <th style="width:80px">Stok Minimum</th>
             <th style="width:120px">Aksi</th>
           </tr>
         </thead>
@@ -190,6 +191,7 @@
               <td><input type="text" class="form-input" placeholder="Kg" name="satuan"></td>
               <td><input type="text" class="form-input" placeholder="0" name="harga"></td>
               <td><input type="text" class="form-input" placeholder="0" name="stok"></td>
+              <td><input type="text" class="form-input" placeholder="0" name="stok_minimum"></td>
               <td>
                 <div class="aksi-group">
                   <button class="btn-simpan" type="submit">Simpan</button>
@@ -251,6 +253,7 @@
                 <td>{{ $barang->satuan }}</td>
                 <td>Rp {{ number_format($barang->harga, 0, ',', '.') }}</td>
                 <td>{{ $barang->stok }}</td>
+                <td>{{ $barang->stok_minimum }}</td>
                 <td>
                   <div class="aksi-group">
                     <a href="{{ route('barang.edit', $barang) }}" class="btn-edit">Edit</a>

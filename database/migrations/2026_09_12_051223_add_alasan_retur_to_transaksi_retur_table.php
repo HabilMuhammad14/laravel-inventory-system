@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('barangs', function (Blueprint $table) {
-            $table->integer('stok_minimum')->default(0)->after('stok');
+        Schema::table('transaksi_retur', function (Blueprint $table) {
+            $table->enum('alasan_retur', ['rusak', 'hilang', 'salah_kirim', 'lainnya'])->after('jumlah');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('barangs', function (Blueprint $table) {
-            $table->dropColumn('stok_minimum');
+        Schema::table('transaksi_retur', function (Blueprint $table) {
+            $table->dropColum('alasan_retur');
         });
     }
 };
